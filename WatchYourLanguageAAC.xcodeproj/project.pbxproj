@@ -6,8 +6,37 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A1EF2AF52FFC694300CF551C /* WatchYourLanguageAAC Watch App Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A1EF2AEB2FFC694200CF551C /* WatchYourLanguageAAC Watch App Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A1EF2AF32FFC694300CF551C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1EF2AD12FFC68F000CF551C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1EF2AEA2FFC694200CF551C;
+			remoteInfo = "WatchYourLanguageAAC Watch App Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A1EF2AF92FFC694300CF551C /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				A1EF2AF52FFC694300CF551C /* WatchYourLanguageAAC Watch App Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		A1EF2AD92FFC68F000CF551C /* WatchYourLanguageAAC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchYourLanguageAAC.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1EF2AEB2FFC694200CF551C /* WatchYourLanguageAAC Watch App Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchYourLanguageAAC Watch App Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,10 +45,22 @@
 			path = WatchYourLanguageAAC;
 			sourceTree = "<group>";
 		};
+		A1EF2AEC2FFC694200CF551C /* WatchYourLanguageAAC Watch App Watch App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "WatchYourLanguageAAC Watch App Watch App";
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A1EF2AD62FFC68F000CF551C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1EF2AE82FFC694200CF551C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				A1EF2ADB2FFC68F000CF551C /* WatchYourLanguageAAC */,
+				A1EF2AEC2FFC694200CF551C /* WatchYourLanguageAAC Watch App Watch App */,
 				A1EF2ADA2FFC68F000CF551C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				A1EF2AD92FFC68F000CF551C /* WatchYourLanguageAAC.app */,
+				A1EF2AEB2FFC694200CF551C /* WatchYourLanguageAAC Watch App Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -55,10 +98,12 @@
 				A1EF2AD52FFC68F000CF551C /* Sources */,
 				A1EF2AD62FFC68F000CF551C /* Frameworks */,
 				A1EF2AD72FFC68F000CF551C /* Resources */,
+				A1EF2AF92FFC694300CF551C /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A1EF2AF42FFC694300CF551C /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				A1EF2ADB2FFC68F000CF551C /* WatchYourLanguageAAC */,
@@ -68,6 +113,28 @@
 			);
 			productName = WatchYourLanguageAAC;
 			productReference = A1EF2AD92FFC68F000CF551C /* WatchYourLanguageAAC.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A1EF2AEA2FFC694200CF551C /* WatchYourLanguageAAC Watch App Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1EF2AF62FFC694300CF551C /* Build configuration list for PBXNativeTarget "WatchYourLanguageAAC Watch App Watch App" */;
+			buildPhases = (
+				A1EF2AE72FFC694200CF551C /* Sources */,
+				A1EF2AE82FFC694200CF551C /* Frameworks */,
+				A1EF2AE92FFC694200CF551C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A1EF2AEC2FFC694200CF551C /* WatchYourLanguageAAC Watch App Watch App */,
+			);
+			name = "WatchYourLanguageAAC Watch App Watch App";
+			packageProductDependencies = (
+			);
+			productName = "WatchYourLanguageAAC Watch App Watch App";
+			productReference = A1EF2AEB2FFC694200CF551C /* WatchYourLanguageAAC Watch App Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -81,6 +148,9 @@
 				LastUpgradeCheck = 2660;
 				TargetAttributes = {
 					A1EF2AD82FFC68F000CF551C = {
+						CreatedOnToolsVersion = 26.6;
+					};
+					A1EF2AEA2FFC694200CF551C = {
 						CreatedOnToolsVersion = 26.6;
 					};
 				};
@@ -100,12 +170,20 @@
 			projectRoot = "";
 			targets = (
 				A1EF2AD82FFC68F000CF551C /* WatchYourLanguageAAC */,
+				A1EF2AEA2FFC694200CF551C /* WatchYourLanguageAAC Watch App Watch App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A1EF2AD72FFC68F000CF551C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1EF2AE92FFC694200CF551C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +200,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A1EF2AE72FFC694200CF551C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A1EF2AF42FFC694300CF551C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1EF2AEA2FFC694200CF551C /* WatchYourLanguageAAC Watch App Watch App */;
+			targetProxy = A1EF2AF32FFC694300CF551C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		A1EF2AE22FFC68F100CF551C /* Debug */ = {
@@ -310,6 +403,72 @@
 			};
 			name = Release;
 		};
+		A1EF2AF72FFC694300CF551C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 77NAF4C4A5;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "WatchYourLanguageAAC Watch App";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.humphreycurtis.WatchYourLanguageAAC;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.humphreycurtis.WatchYourLanguageAAC.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Debug;
+		};
+		A1EF2AF82FFC694300CF551C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 77NAF4C4A5;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "WatchYourLanguageAAC Watch App";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.humphreycurtis.WatchYourLanguageAAC;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.humphreycurtis.WatchYourLanguageAAC.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -327,6 +486,15 @@
 			buildConfigurations = (
 				A1EF2AE52FFC68F100CF551C /* Debug */,
 				A1EF2AE62FFC68F100CF551C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1EF2AF62FFC694300CF551C /* Build configuration list for PBXNativeTarget "WatchYourLanguageAAC Watch App Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1EF2AF72FFC694300CF551C /* Debug */,
+				A1EF2AF82FFC694300CF551C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
