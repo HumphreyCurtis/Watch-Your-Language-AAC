@@ -1,0 +1,58 @@
+//
+//  Speaker.swift
+//  WatchYourLanguageAAC
+//
+
+import AVFoundation
+import Foundation
+
+/// App-wide text-to-speech engine.
+///
+/// A single shared instance so the synthesizer outlives the view that
+/// triggered speech — a synthesizer owned by a view struct can be
+/// deallocated mid-utterance when the view re-renders.
+final class Speaker {
+    static let shared = Speaker()
+
+    private let synthesizer = AVSpeechSynthesizer()
+
+    private init() {}
+
+    func speak(_ phrase: Phrase) {
+        speak(phrase.spokenText, languageCode: phrase.languageCode)
+    }
+
+    func speak(_ text: String, languageCode: String? = nil) {
+        let utterance = AVSpeechUtterance(string: text)
+        utterance.rate = 0.57
+        utterance.pitchMultiplier = 0.8
+        utterance.postUtteranceDelay = 0.2
+        utterance.volume = 0.8
+        utterance.voice = voice(for: languageCode)
+
+        // Repeated taps restart the phrase rather than queueing copies.
+        synthesizer.stopSpeaking(at: .immediate)
+        synthesizer.speak(utterance)
+    }
+
+    /// Picks a voice for the requested language (falling back to the device
+    /// language), honouring the user's voice-gender preference where a
+    /// matching voice is installed.
+    private func voice(for languageCode: String?) -> AVSpeechSynthesisVoice? {
+        let language = languageCode ?? AVSpeechSynthesisVoice.currentLanguageCode()
+        let prefersFemale = UserDefaults.standard.bool(forKey: SettingsKeys.prefersFemaleVoice)
+        let preferredGender: AVSpeechSynthesisVoiceGender = prefersFemale ? .female : .male
+
+        var candidates = AVSpeechSynthesisVoice.speechVoices()
+            .filter { $0.language == language }
+        if candidates.isEmpty {
+            let primary = language.prefix(while: { $0 != "-" })
+            candidates = AVSpeechSynthesisVoice.speechVoices()
+                .filter { $0.language.hasPrefix(primary) }
+        }
+
+        return candidates.first { $0.gender == preferredGender }
+            ?? candidates.first
+            ?? AVSpeechSynthesisVoice(language: language)
+    }
+}

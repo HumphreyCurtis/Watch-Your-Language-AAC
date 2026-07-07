@@ -1,0 +1,56 @@
+//
+//  Phrase.swift
+//  WatchYourLanguageAAC
+//
+
+import Foundation
+
+/// A phrase the wearer can display on screen and speak aloud.
+struct Phrase: Identifiable, Codable, Hashable {
+    var id = UUID()
+
+    /// Short label shown in lists (one or two words).
+    var label: String
+
+    /// Full sentence spoken aloud and displayed word by word.
+    var spokenText: String
+
+    /// SF Symbol name shown alongside the phrase.
+    var systemIcon: String
+
+    /// Emoji shown in place of `systemIcon` when set.
+    var emoji: String?
+
+    /// Display background colour name (see `PhraseColor`). `nil` means red.
+    var colorName: String?
+
+    /// BCP 47 language tag (e.g. "en-GB", "fr-FR"). `nil` follows the device language.
+    var languageCode: String?
+}
+
+/// The set of phrases available in the app.
+///
+/// Currently a fixed default set; `Phrase` is `Codable` so this can later be
+/// user-edited from the iOS companion app and synced to the watch.
+enum PhraseLibrary {
+
+    /// Icon for the "show a disability card" affordance. Kept as data rather
+    /// than baked into views so it can become user-configurable.
+    static let disabilityCardIcon = "figure.roll"
+
+    static let defaults: [Phrase] = [
+        Phrase(label: "Help", spokenText: "Please can you help, it's hard to speak", systemIcon: "questionmark.circle.fill"),
+        Phrase(label: "Stroke", spokenText: "I have had a stroke", systemIcon: "exclamationmark.shield"),
+        Phrase(label: "Slower", spokenText: "Please speak more slowly", systemIcon: "tortoise.fill"),
+        Phrase(label: "Seat", spokenText: "Could you please let me have your seat?", systemIcon: "chair.fill"),
+        Phrase(label: "Time", spokenText: "Please give me time to answer", systemIcon: "clock.badge.exclamationmark.fill"),
+        Phrase(label: "Disability", spokenText: "I have got a hidden disability", systemIcon: "figure.roll"),
+        Phrase(label: "Toilet", spokenText: "Do you have a public or disabled toilet?", systemIcon: "toilet.fill"),
+        Phrase(label: "Thanks", spokenText: "Thank you very much", systemIcon: "hand.thumbsup"),
+    ]
+}
+
+enum SettingsKeys {
+    static let prefersFemaleVoice = "prefersFemaleVoice"
+    static let showsDisabilityBadge = "showsDisabilityBadge"
+}

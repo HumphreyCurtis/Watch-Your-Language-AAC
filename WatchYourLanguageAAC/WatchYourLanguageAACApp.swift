@@ -9,6 +9,15 @@ import SwiftUI
 
 @main
 struct WatchYourLanguageAACApp: App {
+    init() {
+        // Create the stores at launch so WatchConnectivity activates and
+        // edits made on the watch arrive even if a screen is never opened.
+        _ = PhraseStore.shared
+        _ = FavouritesStore.shared
+        _ = WordListStore.shared
+        _ = SettingsStore.shared
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()

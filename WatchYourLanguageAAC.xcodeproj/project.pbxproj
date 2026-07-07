@@ -50,6 +50,11 @@
 			path = "WatchYourLanguageAAC Watch App Watch App";
 			sourceTree = "<group>";
 		};
+		A1EF2B0A2FFC800000CF551C /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Shared;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +78,7 @@
 		A1EF2AD02FFC68F000CF551C = {
 			isa = PBXGroup;
 			children = (
+				A1EF2B0A2FFC800000CF551C /* Shared */,
 				A1EF2ADB2FFC68F000CF551C /* WatchYourLanguageAAC */,
 				A1EF2AEC2FFC694200CF551C /* WatchYourLanguageAAC Watch App Watch App */,
 				A1EF2ADA2FFC68F000CF551C /* Products */,
@@ -107,6 +113,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				A1EF2ADB2FFC68F000CF551C /* WatchYourLanguageAAC */,
+				A1EF2B0A2FFC800000CF551C /* Shared */,
 			);
 			name = WatchYourLanguageAAC;
 			packageProductDependencies = (
@@ -129,6 +136,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				A1EF2AEC2FFC694200CF551C /* WatchYourLanguageAAC Watch App Watch App */,
+				A1EF2B0A2FFC800000CF551C /* Shared */,
 			);
 			name = "WatchYourLanguageAAC Watch App Watch App";
 			packageProductDependencies = (
@@ -349,6 +357,7 @@
 				DEVELOPMENT_TEAM = 77NAF4C4A5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "WYL AAC";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -381,6 +390,7 @@
 				DEVELOPMENT_TEAM = 77NAF4C4A5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "WYL AAC";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -413,7 +423,7 @@
 				DEVELOPMENT_TEAM = 77NAF4C4A5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "WatchYourLanguageAAC Watch App";
+				INFOPLIST_KEY_CFBundleDisplayName = "WYL AAC";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.humphreycurtis.WatchYourLanguageAAC;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -446,7 +456,7 @@
 				DEVELOPMENT_TEAM = 77NAF4C4A5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "WatchYourLanguageAAC Watch App";
+				INFOPLIST_KEY_CFBundleDisplayName = "WYL AAC";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.humphreycurtis.WatchYourLanguageAAC;
 				LD_RUNPATH_SEARCH_PATHS = (
