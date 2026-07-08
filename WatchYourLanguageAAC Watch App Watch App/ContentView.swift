@@ -17,9 +17,9 @@ struct ContentView: View {
                 }
 
                 NavigationLink {
-                    WordsView()
+                    KeywordsView()
                 } label: {
-                    PhraseRow(title: "Words", systemIcon: "scroll.fill")
+                    PhraseRow(title: "Keywords", systemIcon: "key.fill")
                 }
 
                 NavigationLink {
@@ -38,6 +38,12 @@ struct ContentView: View {
                     SettingsView()
                 } label: {
                     PhraseRow(title: "Settings", systemIcon: "gear")
+                }
+
+                NavigationLink {
+                    AboutView()
+                } label: {
+                    PhraseRow(title: "About", systemIcon: "info.circle.fill")
                 }
             }
             .listStyle(.carousel)

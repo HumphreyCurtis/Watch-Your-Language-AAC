@@ -14,6 +14,9 @@ import Foundation
 final class Speaker {
     static let shared = Speaker()
 
+    /// Matches the rate the original research app used.
+    static let defaultRate = 0.57
+
     private let synthesizer = AVSpeechSynthesizer()
 
     private init() {}
@@ -23,8 +26,11 @@ final class Speaker {
     }
 
     func speak(_ text: String, languageCode: String? = nil) {
+        let rate = UserDefaults.standard.object(forKey: SettingsKeys.speechRate) as? Double
+            ?? Self.defaultRate
+
         let utterance = AVSpeechUtterance(string: text)
-        utterance.rate = 0.57
+        utterance.rate = Float(rate)
         utterance.pitchMultiplier = 0.8
         utterance.postUtteranceDelay = 0.2
         utterance.volume = 0.8

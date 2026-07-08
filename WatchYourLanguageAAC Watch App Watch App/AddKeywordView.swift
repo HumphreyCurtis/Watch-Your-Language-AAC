@@ -1,27 +1,28 @@
 //
-//  AddWordView.swift
+//  AddKeywordView.swift
 //  WatchYourLanguageAAC Watch App Watch App
 //
 
 import SwiftUI
 
-/// Adds a word to the word finder's vocabulary.
-struct AddWordView: View {
+/// Adds a keyword — a name, address or place name — synced to the iPhone.
+struct AddKeywordView: View {
     @State private var text = ""
     @State private var confirmation: String?
 
-    private let wordList = WordListStore.shared
+    private var keywords: KeywordsStore { .shared }
 
     var body: some View {
         VStack {
-            Text("Add word to finder:")
+            Text("Add a keyword:")
 
-            TextField("Input word", text: $text)
+            TextField("Name, address, place…", text: $text)
                 .autocorrectionDisabled()
 
             Button("Add") {
-                let word = text
-                confirmation = wordList.add(word) ? "Added \"\(word)\"" : "Already in finder"
+                let word = text.trimmingCharacters(in: .whitespacesAndNewlines)
+                keywords.noteUsed(word)
+                confirmation = "Added \"\(word)\""
                 text = ""
             }
             .disabled(text.trimmingCharacters(in: .whitespaces).isEmpty)
@@ -32,12 +33,12 @@ struct AddWordView: View {
                     .foregroundStyle(.secondary)
             }
         }
-        .navigationTitle("Add Word")
+        .navigationTitle("Add Keyword")
     }
 }
 
 #Preview {
     NavigationStack {
-        AddWordView()
+        AddKeywordView()
     }
 }

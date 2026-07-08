@@ -10,54 +10,71 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List {
-                NavigationLink {
-                    PhrasesView()
-                } label: {
-                    HomeRow(
-                        title: "Phrases",
-                        subtitle: "Speak and customise phrases",
-                        systemIcon: "text.bubble.fill"
-                    )
-                }
+                Section {
+                    NavigationLink {
+                        PhrasesView()
+                    } label: {
+                        HomeRow(
+                            title: "Phrases",
+                            subtitle: "Speak and customise phrases",
+                            systemIcon: "text.bubble.fill"
+                        )
+                    }
 
-                NavigationLink {
-                    WordsView()
-                } label: {
-                    HomeRow(
-                        title: "Words",
-                        subtitle: "Find, favourite and add single words",
-                        systemIcon: "scroll.fill"
-                    )
-                }
+                    NavigationLink {
+                        KeywordsView()
+                    } label: {
+                        HomeRow(
+                            title: "Keywords",
+                            subtitle: "Names, addresses and places, ready to speak",
+                            systemIcon: "key.fill"
+                        )
+                    }
 
-                NavigationLink {
-                    BreatheView()
-                } label: {
-                    HomeRow(
-                        title: "Breathing",
-                        subtitle: "Calming breathing exercises",
-                        systemIcon: "lungs"
-                    )
-                }
+                    NavigationLink {
+                        BreatheView()
+                    } label: {
+                        HomeRow(
+                            title: "Breathing",
+                            subtitle: "Calming breathing exercises",
+                            systemIcon: "lungs"
+                        )
+                    }
 
-                NavigationLink {
-                    AphasiaInfoView()
-                } label: {
-                    HomeRow(
-                        title: "Aphasia",
-                        subtitle: "Information for conversation partners",
-                        systemIcon: "person.fill.questionmark"
-                    )
-                }
+                    NavigationLink {
+                        AphasiaInfoView()
+                    } label: {
+                        HomeRow(
+                            title: "Aphasia",
+                            subtitle: "Information for conversation partners",
+                            systemIcon: "person.fill.questionmark"
+                        )
+                    }
 
-                NavigationLink {
-                    SettingsView()
-                } label: {
-                    HomeRow(
-                        title: "Settings",
-                        subtitle: "Voice options",
-                        systemIcon: "gear"
-                    )
+                    NavigationLink {
+                        SettingsView()
+                    } label: {
+                        HomeRow(
+                            title: "Settings",
+                            subtitle: "Voice options",
+                            systemIcon: "gear"
+                        )
+                    }
+
+                    NavigationLink {
+                        AboutView()
+                    } label: {
+                        HomeRow(
+                            title: "About",
+                            subtitle: "The story behind the app and ways to support it",
+                            systemIcon: "info.circle.fill"
+                        )
+                    }
+                } header: {
+                    Text("Co-designed with communities with aphasia — and ready for communication in other languages too.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .textCase(nil)
                 }
             }
             .navigationTitle("Watch Your Language")

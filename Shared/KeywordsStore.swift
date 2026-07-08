@@ -1,22 +1,23 @@
 //
-//  FavouritesStore.swift
+//  KeywordsStore.swift
 //  WatchYourLanguageAAC
 //
 
 import Foundation
 import Observation
 
-/// The user's favourite words, kept in sync between iPhone and watch.
+/// The user's keywords — personally important words and short items such as
+/// names, addresses and place names — kept in sync between iPhone and watch.
 ///
 /// The list lives in a JSON file on each device; every change stamps
 /// `lastModified` and pushes the whole list to the counterpart via
 /// `AppSync`. Whichever device edited last wins, which is enough for a
 /// list this small and avoids per-entry merge bookkeeping.
 @Observable
-final class FavouritesStore {
-    static let shared = FavouritesStore()
+final class KeywordsStore {
+    static let shared = KeywordsStore()
 
-    /// Most recent first.
+    /// Most recently used first.
     private(set) var words: [String] = []
 
     private var lastModified = Date.distantPast
@@ -24,6 +25,11 @@ final class FavouritesStore {
     private static let maximumCount = 100
 
     private var fileURL: URL {
+        URL.documentsDirectory.appending(path: "Keywords.json")
+    }
+
+    /// Where the list lived when the feature was called "favourites".
+    private var legacyFileURL: URL {
         URL.documentsDirectory.appending(path: "Favourites.json")
     }
 
@@ -34,7 +40,7 @@ final class FavouritesStore {
 
     private init() {
         load()
-        AppSync.shared.register(key: SyncKey.favourites) { [weak self] payload in
+        AppSync.shared.register(key: SyncKey.keywords) { [weak self] payload in
             guard let self,
                   let remoteWords = payload["words"] as? [String],
                   let timestamp = payload["modified"] as? TimeInterval else { return }
@@ -44,7 +50,7 @@ final class FavouritesStore {
         }
     }
 
-    /// Records that a word was used, moving it to the front of the list.
+    /// Records that a keyword was used, moving it to the front of the list.
     func noteUsed(_ word: String) {
         let cleaned = word.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !cleaned.isEmpty else { return }
@@ -79,7 +85,7 @@ final class FavouritesStore {
     }
 
     private func pushCurrent() {
-        AppSync.shared.push(key: SyncKey.favourites, payload: [
+        AppSync.shared.push(key: SyncKey.keywords, payload: [
             "words": words,
             "modified": lastModified.timeIntervalSince1970,
         ])
@@ -90,12 +96,13 @@ final class FavouritesStore {
             let data = try JSONEncoder().encode(Snapshot(words: words, lastModified: lastModified))
             try data.write(to: fileURL, options: .atomic)
         } catch {
-            print("Failed to save favourites: \(error)")
+            print("Failed to save keywords: \(error)")
         }
     }
 
     private func load() {
-        guard let data = try? Data(contentsOf: fileURL),
+        let url = FileManager.default.fileExists(atPath: fileURL.path) ? fileURL : legacyFileURL
+        guard let data = try? Data(contentsOf: url),
               let snapshot = try? JSONDecoder().decode(Snapshot.self, from: data) else { return }
         words = snapshot.words
         lastModified = snapshot.lastModified

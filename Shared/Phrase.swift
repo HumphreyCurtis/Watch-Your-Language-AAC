@@ -47,10 +47,20 @@ enum PhraseLibrary {
         Phrase(label: "Disability", spokenText: "I have got a hidden disability", systemIcon: "figure.roll"),
         Phrase(label: "Toilet", spokenText: "Do you have a public or disabled toilet?", systemIcon: "toilet.fill"),
         Phrase(label: "Thanks", spokenText: "Thank you very much", systemIcon: "hand.thumbsup"),
+    ] + multilingualExamples
+
+    /// Example multilingual phrases — spoken with a voice matching their
+    /// language. Templates to edit or copy for travel and language support.
+    /// New in seed version 2: `PhraseStore` appends these once to phrase
+    /// lists saved by earlier versions.
+    static let multilingualExamples: [Phrase] = [
+        Phrase(label: "Perdu", spokenText: "Je suis perdu, pouvez-vous m'aider ?", systemIcon: "map.fill", emoji: "🇫🇷", languageCode: "fr-FR"),
+        Phrase(label: "Metro", spokenText: "¿Dónde está la estación de metro?", systemIcon: "tram.fill", emoji: "🇪🇸", languageCode: "es-ES"),
     ]
 }
 
 enum SettingsKeys {
     static let prefersFemaleVoice = "prefersFemaleVoice"
     static let showsDisabilityBadge = "showsDisabilityBadge"
+    static let speechRate = "speechRate"
 }

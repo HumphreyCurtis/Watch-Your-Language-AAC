@@ -19,6 +19,13 @@ final class PhraseStore {
 
     private var lastModified = Date.distantPast
 
+    /// Bump when new example phrases join `PhraseLibrary.defaults`, so
+    /// lists saved by earlier versions pick them up once (and only once —
+    /// deleting an example afterwards is respected).
+    private static let currentSeedVersion = 2
+
+    private var seedVersion = PhraseStore.currentSeedVersion
+
     private var fileURL: URL {
         URL.documentsDirectory.appending(path: "Phrases.json")
     }
@@ -26,6 +33,7 @@ final class PhraseStore {
     private struct Snapshot: Codable {
         var phrases: [Phrase]
         var lastModified: Date
+        var seedVersion: Int?
     }
 
     private init() {
@@ -88,7 +96,8 @@ final class PhraseStore {
 
     private func saveToDisk() {
         do {
-            let data = try JSONEncoder().encode(Snapshot(phrases: phrases, lastModified: lastModified))
+            let snapshot = Snapshot(phrases: phrases, lastModified: lastModified, seedVersion: seedVersion)
+            let data = try JSONEncoder().encode(snapshot)
             try data.write(to: fileURL, options: .atomic)
         } catch {
             print("Failed to save phrases: \(error)")
@@ -100,5 +109,22 @@ final class PhraseStore {
               let snapshot = try? JSONDecoder().decode(Snapshot.self, from: data) else { return }
         phrases = snapshot.phrases
         lastModified = snapshot.lastModified
+        seedVersion = snapshot.seedVersion ?? 1
+        seedNewDefaultsIfNeeded()
+    }
+
+    /// Appends example phrases introduced after this list was first saved.
+    private func seedNewDefaultsIfNeeded() {
+        guard seedVersion < Self.currentSeedVersion else { return }
+        seedVersion = Self.currentSeedVersion
+        let existingLabels = Set(phrases.map { $0.label.lowercased() })
+        let newExamples = PhraseLibrary.multilingualExamples.filter {
+            !existingLabels.contains($0.label.lowercased())
+        }
+        if newExamples.isEmpty {
+            saveToDisk()
+        } else {
+            setPhrases(phrases + newExamples)
+        }
     }
 }

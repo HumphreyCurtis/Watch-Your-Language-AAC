@@ -9,8 +9,7 @@ import WatchConnectivity
 /// Keys identifying each synced data set within the application context.
 enum SyncKey {
     static let phrases = "phrases"
-    static let favourites = "favourites"
-    static let customWords = "customWords"
+    static let keywords = "keywords"
     static let settings = "settings"
 }
 

@@ -13,8 +13,7 @@ struct WatchYourLanguageAAC_Watch_App_Watch_AppApp: App {
         // Create the stores at launch so WatchConnectivity activates and
         // edits made on the phone arrive even if a screen is never opened.
         _ = PhraseStore.shared
-        _ = FavouritesStore.shared
-        _ = WordListStore.shared
+        _ = KeywordsStore.shared
         _ = SettingsStore.shared
     }
 
