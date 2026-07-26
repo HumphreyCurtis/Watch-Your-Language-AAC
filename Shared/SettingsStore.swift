@@ -14,6 +14,7 @@ final class SettingsStore {
     static let shared = SettingsStore()
 
     private(set) var showsDisabilityBadge: Bool
+    private(set) var speechRate: Double
 
     private var lastModified: Date
 
@@ -22,12 +23,12 @@ final class SettingsStore {
     private init() {
         let defaults = UserDefaults.standard
         showsDisabilityBadge = defaults.object(forKey: SettingsKeys.showsDisabilityBadge) as? Bool ?? true
+        speechRate = defaults.object(forKey: SettingsKeys.speechRate) as? Double ?? Speaker.defaultRate
         lastModified = Date(timeIntervalSince1970: defaults.double(forKey: Self.modifiedKey))
         AppSync.shared.register(key: SyncKey.settings) { [weak self] payload in
             guard let self,
-                  let value = payload["showsDisabilityBadge"] as? Bool,
                   let timestamp = payload["modified"] as? TimeInterval else { return }
-            applyRemote(showsDisabilityBadge: value, modified: Date(timeIntervalSince1970: timestamp))
+            applyRemote(payload, modified: Date(timeIntervalSince1970: timestamp))
         } onActivated: { [weak self] in
             self?.pushCurrent()
         }
@@ -35,14 +36,28 @@ final class SettingsStore {
 
     func setShowsDisabilityBadge(_ value: Bool) {
         showsDisabilityBadge = value
+        noteChanged()
+    }
+
+    func setSpeechRate(_ value: Double) {
+        speechRate = value
+        noteChanged()
+    }
+
+    private func noteChanged() {
         lastModified = .now
         persist()
         pushCurrent()
     }
 
-    private func applyRemote(showsDisabilityBadge value: Bool, modified: Date) {
+    private func applyRemote(_ payload: [String: Any], modified: Date) {
         guard modified > lastModified else { return }
-        showsDisabilityBadge = value
+        if let value = payload["showsDisabilityBadge"] as? Bool {
+            showsDisabilityBadge = value
+        }
+        if let value = payload["speechRate"] as? Double {
+            speechRate = value
+        }
         lastModified = modified
         persist()
     }
@@ -50,6 +65,7 @@ final class SettingsStore {
     private func pushCurrent() {
         AppSync.shared.push(key: SyncKey.settings, payload: [
             "showsDisabilityBadge": showsDisabilityBadge,
+            "speechRate": speechRate,
             "modified": lastModified.timeIntervalSince1970,
         ])
     }
@@ -57,6 +73,7 @@ final class SettingsStore {
     private func persist() {
         let defaults = UserDefaults.standard
         defaults.set(showsDisabilityBadge, forKey: SettingsKeys.showsDisabilityBadge)
+        defaults.set(speechRate, forKey: SettingsKeys.speechRate)
         defaults.set(lastModified.timeIntervalSince1970, forKey: Self.modifiedKey)
     }
 }

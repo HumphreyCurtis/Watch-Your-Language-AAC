@@ -9,7 +9,7 @@ import SwiftUI
 struct AboutView: View {
     // TODO: Replace with your real Buy Me a Coffee (or similar) page before release.
     private let supportDeveloperURL = URL(string: "https://www.buymeacoffee.com/humphreycurtis")!
-    private let charityURL = URL(string: "https://aphasiareconnect.org/")!
+    private let charityURL = URL(string: "https://aphasiareconnect.org/ways-to-help/donate/")!
     private let researchURL = URL(string: "https://dl.acm.org/doi/10.1145/3597638.3608379")!
 
     private var version: String {
@@ -19,12 +19,12 @@ struct AboutView: View {
     var body: some View {
         List {
             Section("About") {
-                Text("Watch Your Language is a free communication support app. It helps people with aphasia and other communication needs to be understood — showing and speaking phrases from an Apple Watch, right where a conversation happens.")
+                Text("Watch Your Language is a free AAC communication support app. It helps people with aphasia and other communication needs to be understood — showing and speaking phrases from an Apple Watch, right where a conversation happens.")
 
-                Text("It began as published accessibility research into how smartwatches can support communication, and is developed in that spirit: simple, glanceable, and designed with people with aphasia.")
+                Text("It began as published accessibility research into how smartwatches can support communication, and is developed in that spirit: simple, glanceable and designed with communities with aphasia.")
 
                 Link(destination: researchURL) {
-                    Label("Read the research (ASSETS 2023)", systemImage: "doc.text")
+                    Label("Read or cite the research paper", systemImage: "doc.text")
                 }
             }
 

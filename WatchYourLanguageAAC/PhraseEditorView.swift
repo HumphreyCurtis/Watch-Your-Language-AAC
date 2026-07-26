@@ -147,7 +147,7 @@ private struct IconPicker: View {
         }
         .padding(.vertical, 4)
 
-        DisclosureGroup("More icons (emoji)", isExpanded: $isShowingEmoji) {
+        DisclosureGroup("Keyboard icons & emojis", isExpanded: $isShowingEmoji) {
             HStack {
                 EmojiTextField(text: $customEmoji, placeholder: "Pick any emoji — flags too 🙂")
 

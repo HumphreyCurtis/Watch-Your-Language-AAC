@@ -36,7 +36,7 @@ struct AphasiaInfoView: View {
 
             Section("Learn more") {
                 Link(destination: AphasiaInfo.learnMoreURL) {
-                    Label("Aphasia and its effects — Stroke Association", systemImage: "safari")
+                    Label("Read more about aphasia", systemImage: "safari")
                 }
 
                 VStack(spacing: 8) {
@@ -46,7 +46,7 @@ struct AphasiaInfoView: View {
                         .frame(height: 150)
                         .accessibilityLabel("QR code linking to aphasia information from the Stroke Association")
 
-                    Text("Show this code so a conversation partner can scan it and learn more.")
+                    Text("Show this code so a conversation partner can scan it and learn more about aphasia.")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)

@@ -26,7 +26,7 @@ struct ContentView: View {
                     } label: {
                         HomeRow(
                             title: "Keywords",
-                            subtitle: "Names, addresses and places, ready to speak",
+                            subtitle: "Names, addresses and places - ready to store and speak",
                             systemIcon: "key.fill"
                         )
                     }
@@ -45,7 +45,7 @@ struct ContentView: View {
                         AphasiaInfoView()
                     } label: {
                         HomeRow(
-                            title: "Aphasia",
+                            title: "Aphasia Info",
                             subtitle: "Information for conversation partners",
                             systemIcon: "person.fill.questionmark"
                         )
@@ -71,7 +71,7 @@ struct ContentView: View {
                         )
                     }
                 } header: {
-                    Text("Co-designed with communities with aphasia — and ready for communication in other languages too.")
+                    Text("Co-designed with communities with aphasia and ready for communication in other languages too!")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .textCase(nil)
