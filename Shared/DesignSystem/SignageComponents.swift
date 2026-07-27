@@ -54,9 +54,30 @@ struct SignageRow: View {
     var tint: SignageColor = TransportPalette.roundelBlue
 
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    // The badge grows with the text. Someone who has turned type up needs
+    // the icon bigger too — a 38pt circle beside 90pt text reads as an
+    // afterthought and loses the colour cue that identifies the row.
+    #if os(watchOS)
+    @ScaledMetric(relativeTo: .title2) private var scaledBadge: CGFloat = 28
+    #else
+    @ScaledMetric(relativeTo: .headline) private var scaledBadge: CGFloat = 38
+    #endif
+
+    /// Side by side normally; badge above text at accessibility sizes.
+    ///
+    /// Beyond a point the badge and the text cannot share a line — the text
+    /// column gets so narrow that single words break mid-word. Stacking
+    /// gives the title the full width instead.
+    private var layout: AnyLayout {
+        dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 10))
+            : AnyLayout(HStackLayout(spacing: 14))
+    }
 
     var body: some View {
-        HStack(spacing: 14) {
+        layout {
             RoundelBadge(systemIcon: systemIcon, emoji: emoji, tint: tint, size: badgeSize)
 
             VStack(alignment: .leading, spacing: 1) {
@@ -66,9 +87,11 @@ struct SignageRow: View {
 
                 if let subtitle {
                     Text(subtitle)
+                        // One line normally, but at accessibility sizes a
+                        // single line shows almost nothing of a sentence.
                         .font(.appSubheadline)
                         .foregroundStyle(TransportPalette.corporateGrey.color)
-                        .lineLimit(1)
+                        .lineLimit(dynamicTypeSize.isAccessibilitySize ? 4 : 1)
                 }
             }
 
@@ -85,11 +108,13 @@ struct SignageRow: View {
     // The phone has room to breathe, and generous targets are easier to hit
     // for someone with limited dexterity.
 
+    /// Capped so the badge stays a marker beside the text rather than
+    /// growing into a competing block at the largest settings.
     private var badgeSize: CGFloat {
         #if os(watchOS)
-        28
+        min(scaledBadge, 40)
         #else
-        38
+        min(scaledBadge, 58)
         #endif
     }
 
