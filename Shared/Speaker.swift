@@ -42,23 +42,33 @@ final class Speaker {
     }
 
     /// Picks a voice for the requested language (falling back to the device
-    /// language), honouring the user's voice-gender preference where a
-    /// matching voice is installed.
+    /// language), honouring the user's voice-gender preference.
+    ///
+    /// The preference is worth crossing a region for. Most devices ship a
+    /// single voice per exact locale — a UK device has only Daniel, who is
+    /// male — so matching on `en-GB` alone means the toggle silently does
+    /// nothing. Widening to the language lets it reach Samantha or Karen.
+    /// A different English accent is a smaller surprise than a switch that
+    /// visibly does not work.
     private func voice(for languageCode: String?) -> AVSpeechSynthesisVoice? {
         let language = languageCode ?? AVSpeechSynthesisVoice.currentLanguageCode()
+        let primary = language.prefix { $0 != "-" }
         let prefersFemale = UserDefaults.standard.bool(forKey: SettingsKeys.prefersFemaleVoice)
         let preferredGender: AVSpeechSynthesisVoiceGender = prefersFemale ? .female : .male
 
-        var candidates = AVSpeechSynthesisVoice.speechVoices()
-            .filter { $0.language == language }
-        if candidates.isEmpty {
-            let primary = language.prefix(while: { $0 != "-" })
-            candidates = AVSpeechSynthesisVoice.speechVoices()
-                .filter { $0.language.hasPrefix(primary) }
-        }
+        let all = AVSpeechSynthesisVoice.speechVoices()
+        let exact = all.filter { $0.language == language }
+        let sameLanguage = all.filter { $0.language.hasPrefix(primary) }
 
-        return candidates.first { $0.gender == preferredGender }
-            ?? candidates.first
+        return exact.first { $0.gender == preferredGender }
+            // Right gender, wrong region — still better than ignoring it.
+            ?? sameLanguage.first { $0.gender == preferredGender }
+            ?? exact.first
+            // The novelty voices (Bells, Zarvox, Bad News) report an
+            // unspecified gender and are in the language pool. Requiring a
+            // declared gender keeps a phrase from being read out in one of
+            // them, which in this app would be humiliating rather than fun.
+            ?? sameLanguage.first { $0.gender != .unspecified }
             ?? AVSpeechSynthesisVoice(language: language)
     }
 }

@@ -33,8 +33,16 @@ struct SettingsView: View {
 
     var body: some View {
         Form {
+            // Switches first, then the sliders. The two kinds of control
+            // read very differently at a glance, and keeping them apart
+            // makes the screen scannable rather than a mixed list.
             Section {
                 Toggle("Female voice", isOn: $prefersFemaleVoice)
+
+                Toggle("Disability badge", isOn: Binding(
+                    get: { settings.showsDisabilityBadge },
+                    set: { settings.setShowsDisabilityBadge($0) }
+                ))
             } header: {
                 #if os(iOS)
                 VStack(alignment: .leading, spacing: 10) {
@@ -43,39 +51,14 @@ struct SettingsView: View {
                         .foregroundStyle(TransportPalette.corporateGrey.color)
                         .textCase(nil)
 
-                    Label("System Voice", systemImage: "speaker.wave.2.circle.fill")
+                    Label("Options", systemImage: "switch.2")
                 }
                 #else
-                Label("System Voice", systemImage: "speaker.wave.2.circle.fill")
+                Label("Options", systemImage: "switch.2")
                 #endif
-            }
-
-            Section {
-                #if os(iOS)
-                Slider(
-                    value: speechRate,
-                    in: 0.3...0.7,
-                    step: 0.05
-                ) {
-                    Text("Speaking speed")
-                } minimumValueLabel: {
-                    Image(systemName: "tortoise.fill")
-                        .foregroundStyle(TransportPalette.corporateGrey.color)
-                } maximumValueLabel: {
-                    Image(systemName: "hare.fill")
-                        .foregroundStyle(TransportPalette.corporateGrey.color)
-                }
-                #else
-                Slider(value: speechRate, in: 0.3...0.7, step: 0.05) {
-                    Text("Speed")
-                }
-                #endif
-
-                Button("Test voice") {
-                    Speaker.shared.speak("Hello, this is how I will speak.")
-                }
-            } header: {
-                Label("Speaking Speed", systemImage: "gauge.with.needle")
+            } footer: {
+                Text("The disability badge adds a button to the watch phrase screens that shows a disability card.")
+                    .font(.appFootnote)
             }
 
             Section {
@@ -106,13 +89,31 @@ struct SettingsView: View {
             }
 
             Section {
-                Toggle("Disability badge", isOn: Binding(
-                    get: { settings.showsDisabilityBadge },
-                    set: { settings.setShowsDisabilityBadge($0) }
-                ))
-            } footer: {
-                Text("Adds a button to the watch phrase screens that shows a disability card.")
-                    .font(.appFootnote)
+                #if os(iOS)
+                Slider(
+                    value: speechRate,
+                    in: 0.3...0.7,
+                    step: 0.05
+                ) {
+                    Text("Speaking speed")
+                } minimumValueLabel: {
+                    Image(systemName: "tortoise.fill")
+                        .foregroundStyle(TransportPalette.corporateGrey.color)
+                } maximumValueLabel: {
+                    Image(systemName: "hare.fill")
+                        .foregroundStyle(TransportPalette.corporateGrey.color)
+                }
+                #else
+                Slider(value: speechRate, in: 0.3...0.7, step: 0.05) {
+                    Text("Speed")
+                }
+                #endif
+
+                Button("Test voice") {
+                    Speaker.shared.speak("Hello, this is how I will speak.")
+                }
+            } header: {
+                Label("Speaking Speed", systemImage: "gauge.with.needle")
             }
         }
         // `Toggle`, `Slider` and `Button` labels are system controls and
