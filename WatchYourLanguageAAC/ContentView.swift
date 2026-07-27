@@ -79,12 +79,26 @@ struct ContentView: View {
                         }
                         .signageRowStyle()
                     }
+                } header: {
+                    introduction
                 }
             }
             .listStyle(.plain)
             .signageSurface()
             .navigationTitle("Watch Your Language")
         }
+    }
+
+    /// Two lines saying what the app is for, above the menu. Short by
+    /// design: it is read once, and the rows below are the point.
+    private var introduction: some View {
+        Text("Show and speak phrases from your Apple Watch.\nMade with and for people with aphasia.")
+            .font(.appSubheadline)
+            .foregroundStyle(TransportPalette.corporateGrey.color)
+            .textCase(nil)
+            .fixedSize(horizontal: false, vertical: true)
+            .padding(.horizontal, 12)
+            .padding(.bottom, 6)
     }
 
     @ViewBuilder
