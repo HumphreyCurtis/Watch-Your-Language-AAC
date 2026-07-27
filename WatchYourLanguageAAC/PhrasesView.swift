@@ -51,6 +51,7 @@ struct PhrasesView: View {
         .listStyle(.plain)
         .signageSurface()
         .navigationTitle("Phrases")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button {

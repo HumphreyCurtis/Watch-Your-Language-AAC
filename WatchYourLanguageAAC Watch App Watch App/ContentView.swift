@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-/// Home screen: the app's five main features, mirroring the iPhone app.
+/// Home screen: the app's six main features, mirroring the iPhone app.
 struct ContentView: View {
     var body: some View {
         NavigationStack {

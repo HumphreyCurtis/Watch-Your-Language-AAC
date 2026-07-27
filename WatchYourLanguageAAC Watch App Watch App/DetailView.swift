@@ -39,17 +39,20 @@ struct DetailView: View {
             TimelineView(.periodic(from: .now, by: 0.5)) { context in
                 VStack(spacing: 10) {
                     Text(word(at: context.date))
-                        // Atkinson runs wider than SF Pro, so this is a
-                        // little smaller than the original 55pt to keep
-                        // long words from collapsing to the scale floor.
-                        .font(.appDisplay(50))
+                        .font(.appDisplay(56))
                         .multilineTextAlignment(.center)
                         // One word, on one line, as large as it will go.
                         // Without the line limit `minimumScaleFactor` never
                         // engages and a long word breaks mid-way instead of
                         // shrinking — unreadable for someone being shown it.
+                        //
+                        // The floor is 0.5 rather than 0.4: short words like
+                        // "Help" and "Yes" are the common case and should be
+                        // as big as the screen allows, and a word that needs
+                        // to go below half of 56pt is too long to read at
+                        // arm's length anyway.
                         .lineLimit(1)
-                        .minimumScaleFactor(0.4)
+                        .minimumScaleFactor(0.5)
 
                     if let emoji = phrase.emoji {
                         Text(emoji)
@@ -75,39 +78,44 @@ struct DetailView: View {
                 Speaker.shared.speak(phrase)
             }
 
-            HStack {
-                Button {
+            // Each control takes an equal share of the width. Previously
+            // these were bare glyphs spaced apart, so the tap target was the
+            // symbol itself — a few points across, next to a full-screen
+            // target that speaks the phrase. Every near miss said the phrase
+            // again instead of ringing the bell or flipping the screen.
+            HStack(spacing: 6) {
+                ControlButton(
+                    systemIcon: "speaker.badge.exclamationmark",
+                    label: "Get attention",
+                    tint: foregroundColor
+                ) {
                     WKInterfaceDevice.current().play(.stop)
-                } label: {
-                    Image(systemName: "speaker.badge.exclamationmark")
                 }
-                .accessibilityLabel("Get attention")
-
-                Spacer()
 
                 if showsDisabilityBadge {
-                    Button {
+                    ControlButton(
+                        systemIcon: PhraseLibrary.disabilityCardIcon,
+                        label: "Show disability card",
+                        tint: foregroundColor
+                    ) {
                         isShowingDisabilityCard = true
-                    } label: {
-                        Image(systemName: PhraseLibrary.disabilityCardIcon)
                     }
-                    .accessibilityLabel("Show disability card")
-
-                    Spacer()
                 }
 
-                Button {
+                ControlButton(
+                    systemIcon: "arrow.triangle.2.circlepath.camera",
+                    label: "Flip for reader opposite",
+                    tint: foregroundColor
+                ) {
                     isFlipped.toggle()
-                } label: {
-                    Image(systemName: "arrow.triangle.2.circlepath.camera")
                 }
-                .accessibilityLabel("Flip for reader opposite")
             }
-            .buttonStyle(.plain)
-            .imageScale(.large)
-            .foregroundStyle(foregroundColor)
-            .padding(.horizontal)
-            .padding(.bottom, 4)
+            .frame(height: 44)
+            .padding(.horizontal, 6)
+            // Sat low on the screen, close to the bezel: it keeps the row
+            // clear of the phrase above it, and the bottom of the watch is
+            // the easiest part to reach with a thumb.
+            .padding(.bottom, -2)
         }
         .background(backgroundColor)
         .toolbarBackground(backgroundColor, for: .navigationBar)
@@ -120,6 +128,32 @@ struct DetailView: View {
         guard !words.isEmpty else { return phrase.label }
         let tick = Int(date.timeIntervalSinceReferenceDate / 0.5)
         return words[tick % words.count]
+    }
+}
+
+/// One of the phrase screen's bottom controls.
+///
+/// The capsule is not decoration: it shows where the target is. Reversed out
+/// of the phrase colour at low opacity it stays quiet against the sign while
+/// still telling someone with limited dexterity where to aim.
+private struct ControlButton: View {
+    let systemIcon: String
+    let label: String
+    let tint: Color
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Image(systemName: systemIcon)
+                .imageScale(.large)
+                .foregroundStyle(tint)
+                // The whole slot is the target, not the glyph.
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Capsule().fill(tint.opacity(0.18)))
+                .contentShape(Capsule())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(label)
     }
 }
 

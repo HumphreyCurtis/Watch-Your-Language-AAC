@@ -177,18 +177,36 @@ struct PlatformHeader: View {
 extension View {
     /// Puts a view on the signage surface, hiding the system list chrome so
     /// custom row blocks read as flat panels rather than inset cards.
-    func signageSurface() -> some View {
-        modifier(SignageSurface())
+    ///
+    /// - Parameter moquette: draws the seat-fabric pattern behind the
+    ///   surface. On by default on iPhone, so the app has one surface
+    ///   throughout rather than a decorated home screen and plain rooms off
+    ///   it. Pass `false` for a screen that needs a dead-flat background.
+    ///   Ignored on the watch, where the pattern is never drawn.
+    func signageSurface(moquette: Bool = true) -> some View {
+        modifier(SignageSurface(moquette: moquette))
     }
 }
 
 private struct SignageSurface: ViewModifier {
+    var moquette = true
+
     @Environment(\.colorScheme) private var colorScheme
 
     func body(content: Content) -> some View {
         content
             .scrollContentBackground(.hidden)
-            .background(TransportPalette.surface(colorScheme))
+            .background {
+                #if os(iOS)
+                if moquette {
+                    MoquetteBackground()
+                } else {
+                    TransportPalette.surface(colorScheme)
+                }
+                #else
+                TransportPalette.surface(colorScheme)
+                #endif
+            }
     }
 }
 

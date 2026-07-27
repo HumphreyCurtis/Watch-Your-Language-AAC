@@ -56,6 +56,7 @@ struct KeywordsView: View {
         }
         .signageSurface()
         .navigationTitle("Keywords")
+        .navigationBarTitleDisplayMode(.inline)
     }
 
     private func addKeyword() {

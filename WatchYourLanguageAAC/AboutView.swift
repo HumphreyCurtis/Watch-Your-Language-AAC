@@ -17,12 +17,14 @@ struct AboutView: View {
 
     var body: some View {
         List {
-            Section("About") {
+            Section {
                 Text("Watch Your Language is a free AAC communication support app. It helps people with aphasia and other communication needs to be understood — showing and speaking phrases from an Apple Watch, right where a conversation happens.")
 
                 Link(destination: researchURL) {
                     Label("Read or cite the research paper", systemImage: "doc.text")
                 }
+            } header: {
+                PlatformHeader(text: "About", tint: TransportPalette.elizabeth)
             }
 
             Section {
@@ -34,7 +36,7 @@ struct AboutView: View {
                     Label("Donate to Aphasia Re-Connect", systemImage: "heart.circle.fill")
                 }
             } header: {
-                Text("Support")
+                PlatformHeader(text: "Support", tint: TransportPalette.elizabeth)
             } footer: {
                 Text("The app is free and always will be. Aphasia Re-Connect is UK registered charity 1176125.")
                     .font(.appFootnote)
@@ -49,8 +51,13 @@ struct AboutView: View {
                 }
             }
         }
+        // System controls — `Link`, `Label`, plain `Text` — default to SF.
+        // Setting the font on the list is what makes them Atkinson too,
+        // rather than annotating every row.
+        .font(.appBody)
         .signageSurface()
         .navigationTitle("About")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

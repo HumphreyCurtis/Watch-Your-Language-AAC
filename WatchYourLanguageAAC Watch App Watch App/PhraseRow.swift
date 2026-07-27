@@ -13,13 +13,16 @@ struct PhraseRow: View {
     var tint: SignageColor = TransportPalette.roundelBlue
 
     var body: some View {
-        HStack(spacing: 10) {
-            RoundelBadge(systemIcon: systemIcon, emoji: emoji, tint: tint, size: 30)
+        HStack(spacing: 8) {
+            // Smaller than the title deserves, because the title matters
+            // more: the badge gives up room so the larger type fits without
+            // shrinking back to where it started.
+            RoundelBadge(systemIcon: systemIcon, emoji: emoji, tint: tint, size: 26)
 
             Text(title)
                 .font(.appTitle2)
                 .lineLimit(1)
-                .minimumScaleFactor(0.7)
+                .minimumScaleFactor(0.55)
 
             Spacer(minLength: 0)
         }

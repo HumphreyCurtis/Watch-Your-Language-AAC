@@ -22,13 +22,15 @@ struct AphasiaInfoView: View {
                     .font(.appFootnote)
             }
 
-            Section("Tips for communication") {
+            Section {
                 ForEach(Array(AphasiaInfo.tips.enumerated()), id: \.offset) { index, tip in
                     SpeakableRow(text: tip, prefix: "\(index + 1).")
                 }
+            } header: {
+                PlatformHeader(text: "Tips for communication", tint: TransportPalette.district)
             }
 
-            Section("Learn more") {
+            Section {
                 Link(destination: AphasiaInfo.learnMoreURL) {
                     Label("Read more about aphasia", systemImage: "safari")
                 }
@@ -47,10 +49,15 @@ struct AphasiaInfoView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 8)
+            } header: {
+                PlatformHeader(text: "Learn more", tint: TransportPalette.district)
             }
         }
+        // Otherwise the `Link`'s label falls back to SF.
+        .font(.appBody)
         .signageSurface()
         .navigationTitle("Aphasia")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

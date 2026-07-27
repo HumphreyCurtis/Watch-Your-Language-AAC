@@ -86,19 +86,26 @@ struct ContentView: View {
             .listStyle(.plain)
             .signageSurface()
             .navigationTitle("Watch Your Language")
+            // Inline, because the system centres an inline title and never
+            // centres a large one.
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 
-    /// Two lines saying what the app is for, above the menu. Short by
-    /// design: it is read once, and the rows below are the point.
+    /// What the app is for, in the same quiet heading style the rest of the
+    /// app uses ("Your words" on Keywords). Read once, then ignored — the
+    /// rows below are the point, so this stays out of their way.
+    ///
+    /// `PlatformHeader` sets the text in capitals, which suits a label but
+    /// not a sentence, so the second line ("Made with and for people with
+    /// aphasia") has gone rather than being shouted.
     private var introduction: some View {
-        Text("Show and speak phrases from your Apple Watch.\nMade with and for people with aphasia.")
-            .font(.appSubheadline)
-            .foregroundStyle(TransportPalette.corporateGrey.color)
-            .textCase(nil)
-            .fixedSize(horizontal: false, vertical: true)
-            .padding(.horizontal, 12)
-            .padding(.bottom, 6)
+        PlatformHeader(
+            text: "Show and speak phrases from your Apple Watch",
+            tint: TransportPalette.central
+        )
+        // Matches the grouped screens' header inset — see `BreatheView`.
+        .listRowInsets(EdgeInsets(top: 0, leading: 32, bottom: 4, trailing: 20))
     }
 
     @ViewBuilder

@@ -58,22 +58,27 @@ enum AppFont {
 
 extension Font {
 
-    // Base sizes are the platform's own text-style sizes at the default
-    // content size; `relativeTo:` scales from there. watchOS runs smaller
-    // than iOS, so the two are listed separately rather than sharing one
-    // table and looking oversized on the watch.
+    // Base sizes at the default content size; `relativeTo:` scales from
+    // there. watchOS runs smaller than iOS, so the two are listed separately
+    // rather than sharing one table and looking oversized on the watch.
+    //
+    // The watch table sits deliberately a step *above* the platform's own
+    // text-style sizes. On device the stock sizes read small for the people
+    // this app is for, and a watch screen is glanced at, not studied — this
+    // is a considered choice, not a table that drifted. Please don't
+    // "correct" it back to Apple's numbers.
     #if os(watchOS)
     private enum Size {
-        static let largeTitle: CGFloat = 30
-        static let title: CGFloat = 24
-        static let title2: CGFloat = 19
-        static let title3: CGFloat = 17
-        static let headline: CGFloat = 16
-        static let body: CGFloat = 16
-        static let callout: CGFloat = 15
-        static let subheadline: CGFloat = 14
-        static let footnote: CGFloat = 13
-        static let caption: CGFloat = 12
+        static let largeTitle: CGFloat = 33
+        static let title: CGFloat = 26
+        static let title2: CGFloat = 21
+        static let title3: CGFloat = 18
+        static let headline: CGFloat = 17
+        static let body: CGFloat = 17
+        static let callout: CGFloat = 16
+        static let subheadline: CGFloat = 15
+        static let footnote: CGFloat = 14
+        static let caption: CGFloat = 13
     }
     #else
     private enum Size {

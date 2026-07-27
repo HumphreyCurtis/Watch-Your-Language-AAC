@@ -23,11 +23,18 @@ struct BreatheView: View {
                 }
             } header: {
                 PlatformHeader(text: "Exercises", tint: TransportPalette.victoria)
+                    // A `.plain` list gives its headers a tall top inset and
+                    // no leading one, which put this lower and further left
+                    // than the same header on the grouped screens. Matching
+                    // their position by hand keeps the app's headings on one
+                    // line as you move between screens.
+                    .listRowInsets(EdgeInsets(top: 0, leading: 32, bottom: 4, trailing: 20))
             }
         }
         .listStyle(.plain)
         .signageSurface()
         .navigationTitle("Breathing")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

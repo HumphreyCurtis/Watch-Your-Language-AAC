@@ -74,7 +74,17 @@ struct SettingsView: View {
                     .font(.appFootnote)
             }
         }
+        // `Toggle`, `Slider` and `Button` labels are system controls and
+        // default to SF; the form-wide font is what brings them into
+        // Atkinson with the rest of the app.
+        .font(.appBody)
+        .signageSurface()
         .navigationTitle("Settings")
+        // This file builds for the watch too, where the modifier does not
+        // exist and the title is left to the system.
+        #if os(iOS)
+        .navigationBarTitleDisplayMode(.inline)
+        #endif
     }
 }
 
