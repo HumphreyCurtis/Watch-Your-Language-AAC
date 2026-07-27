@@ -74,6 +74,11 @@ enum PhraseTransfer {
     /// One list, used by both, so the picker and the prompt cannot drift
     /// apart — and so every icon used by `PhraseLibrary.defaults` is
     /// offerable.
+    ///
+    /// Kept at 30. The picker lays these out in an adaptive grid, and 30
+    /// divides by 2, 3, 5 and 6, so it fills whole rows at every column
+    /// count a phone is likely to choose rather than leaving one icon
+    /// stranded on a line of its own. Add icons in pairs or not at all.
     static let curatedSymbols = [
         "text.bubble.fill", "questionmark.circle.fill", "exclamationmark.shield", "tortoise.fill",
         "chair.fill", "clock.badge.exclamationmark.fill", "figure.roll", "toilet.fill",
@@ -82,7 +87,7 @@ enum PhraseTransfer {
         "bed.double.fill", "house.fill", "car.fill", "bus",
         "tram.fill", "map.fill", "phone.fill", "envelope.fill",
         "creditcard.fill", "key.fill", "sun.max.fill", "cloud.rain.fill",
-        "star.fill", "ear", "eye",
+        "star.fill", "ear",
     ]
 
     /// Whether a symbol name will actually draw.

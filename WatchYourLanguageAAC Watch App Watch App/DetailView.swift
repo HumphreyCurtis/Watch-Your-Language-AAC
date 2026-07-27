@@ -15,6 +15,10 @@ struct DetailView: View {
     // toggle disagree until the setting is written for the first time.
     @AppStorage(SettingsKeys.showsDisabilityBadge) private var showsDisabilityBadge = false
 
+    // Read live, so changing the pace in Settings takes effect on the next
+    // phrase without the app being relaunched.
+    @AppStorage(SettingsKeys.wordInterval) private var wordInterval = WordPace.default
+
     @State private var isFlipped = false
     @State private var isShowingDisabilityCard = false
 
@@ -36,7 +40,7 @@ struct DetailView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            TimelineView(.periodic(from: .now, by: 0.5)) { context in
+            TimelineView(.periodic(from: .now, by: wordInterval)) { context in
                 VStack(spacing: 10) {
                     Text(word(at: context.date))
                         .font(.appDisplay(56))
@@ -112,12 +116,16 @@ struct DetailView: View {
             }
             .frame(height: 44)
             .padding(.horizontal, 6)
-            // Sat low on the screen, close to the bezel: it keeps the row
-            // clear of the phrase above it, and the bottom of the watch is
-            // the easiest part to reach with a thumb.
-            .padding(.bottom, -2)
+            // Enough to clear the corner curve — the capsules are wide, so
+            // their ends are exactly where the screen starts rounding away.
+            .padding(.bottom, 10)
         }
         .background(backgroundColor)
+        // watchOS reserves an inset along the bottom that held the row well
+        // clear of the bezel. The screen is a full-bleed sign with nothing
+        // to protect down there, and the very bottom of the watch is the
+        // easiest place to hit, so the row is allowed into it.
+        .ignoresSafeArea(.container, edges: .bottom)
         .toolbarBackground(backgroundColor, for: .navigationBar)
         .sheet(isPresented: $isShowingDisabilityCard) {
             DisabilityCardView()
@@ -126,7 +134,7 @@ struct DetailView: View {
 
     private func word(at date: Date) -> String {
         guard !words.isEmpty else { return phrase.label }
-        let tick = Int(date.timeIntervalSinceReferenceDate / 0.5)
+        let tick = Int(date.timeIntervalSinceReferenceDate / wordInterval)
         return words[tick % words.count]
     }
 }

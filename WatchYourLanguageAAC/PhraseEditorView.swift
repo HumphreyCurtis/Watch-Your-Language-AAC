@@ -41,20 +41,18 @@ struct PhraseEditorView: View {
     }
 
     var body: some View {
-        VStack {
-            Picker("View", selection: $mode) {
-                ForEach(Mode.allCases, id: \.self) {
-                    Text($0.rawValue)
-                }
-            }
-            .pickerStyle(.segmented)
-            .padding(.horizontal)
-
+        Group {
             switch mode {
             case .edit:
                 editForm
             case .play:
-                PhrasePlayView(phrase: draft)
+                VStack(spacing: 0) {
+                    modePicker
+                        .padding(.horizontal, 20)
+                        .padding(.top, 20)
+
+                    PhrasePlayView(phrase: draft)
+                }
             }
         }
         // On the whole stack, not just the form: `scrollContentBackground`
@@ -86,8 +84,31 @@ struct PhraseEditorView: View {
         }
     }
 
+    /// Switches between editing the phrase and previewing it.
+    ///
+    /// It scrolls with the content rather than being pinned above it: on a
+    /// screen this long a sticky bar costs height on every scroll, and the
+    /// switch is something you reach for once, at the top.
+    private var modePicker: some View {
+        Picker("View", selection: $mode) {
+            ForEach(Mode.allCases, id: \.self) {
+                Text($0.rawValue)
+            }
+        }
+        .pickerStyle(.segmented)
+    }
+
     private var editForm: some View {
         Form {
+            Section {
+                modePicker
+                    .listRowBackground(Color.clear)
+                    // The 20 here is the same 20 the Play tab uses, and it
+                    // only lands in the same place because the form's own
+                    // top margin is zeroed below.
+                    .listRowInsets(EdgeInsets(top: 20, leading: 20, bottom: 4, trailing: 20))
+            }
+
             Section {
                 TextField("Short label (e.g. Water)", text: $draft.label)
             } header: {
@@ -122,6 +143,11 @@ struct PhraseEditorView: View {
                 }
             }
         }
+        // A `Form` insets its content from the bar by default, which put the
+        // picker lower here than the same control on the Play tab. Zeroed so
+        // the row's own top inset is the only spacing, and the two tabs line
+        // up as you switch between them.
+        .contentMargins(.top, 0, for: .scrollContent)
     }
 }
 
@@ -290,6 +316,10 @@ private struct ScreenColorPicker: View {
 struct PhrasePlayView: View {
     let phrase: Phrase
 
+    /// The same pace the watch uses, so the preview is honest about how the
+    /// phrase will actually read.
+    @AppStorage(SettingsKeys.wordInterval) private var wordInterval = WordPace.default
+
     private var words: [String] {
         phrase.spokenText.split(separator: " ").map(String.init)
     }
@@ -299,7 +329,7 @@ struct PhrasePlayView: View {
             Spacer()
 
             VStack(spacing: 12) {
-                TimelineView(.periodic(from: .now, by: 0.5)) { context in
+                TimelineView(.periodic(from: .now, by: wordInterval)) { context in
                     Text(word(at: context.date))
                         .font(.appDisplay(40))
                         .lineLimit(1)
@@ -341,7 +371,7 @@ struct PhrasePlayView: View {
 
     private func word(at date: Date) -> String {
         guard !words.isEmpty else { return "…" }
-        let tick = Int(date.timeIntervalSinceReferenceDate / 0.5)
+        let tick = Int(date.timeIntervalSinceReferenceDate / wordInterval)
         return words[tick % words.count]
     }
 }

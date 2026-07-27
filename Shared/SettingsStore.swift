@@ -15,6 +15,7 @@ final class SettingsStore {
 
     private(set) var showsDisabilityBadge: Bool
     private(set) var speechRate: Double
+    private(set) var wordInterval: Double
 
     private var lastModified: Date
 
@@ -26,6 +27,7 @@ final class SettingsStore {
         // theirs to opt into, not something the app should show by default.
         showsDisabilityBadge = defaults.object(forKey: SettingsKeys.showsDisabilityBadge) as? Bool ?? false
         speechRate = defaults.object(forKey: SettingsKeys.speechRate) as? Double ?? Speaker.defaultRate
+        wordInterval = WordPace.current
         lastModified = Date(timeIntervalSince1970: defaults.double(forKey: Self.modifiedKey))
         AppSync.shared.register(key: SyncKey.settings) { [weak self] payload in
             guard let self,
@@ -46,6 +48,11 @@ final class SettingsStore {
         noteChanged()
     }
 
+    func setWordInterval(_ value: Double) {
+        wordInterval = value
+        noteChanged()
+    }
+
     private func noteChanged() {
         lastModified = .now
         persist()
@@ -60,6 +67,9 @@ final class SettingsStore {
         if let value = payload["speechRate"] as? Double {
             speechRate = value
         }
+        if let value = payload["wordInterval"] as? Double {
+            wordInterval = value
+        }
         lastModified = modified
         persist()
     }
@@ -68,6 +78,7 @@ final class SettingsStore {
         AppSync.shared.push(key: SyncKey.settings, payload: [
             "showsDisabilityBadge": showsDisabilityBadge,
             "speechRate": speechRate,
+            "wordInterval": wordInterval,
             "modified": lastModified.timeIntervalSince1970,
         ])
     }
@@ -76,6 +87,7 @@ final class SettingsStore {
         let defaults = UserDefaults.standard
         defaults.set(showsDisabilityBadge, forKey: SettingsKeys.showsDisabilityBadge)
         defaults.set(speechRate, forKey: SettingsKeys.speechRate)
+        defaults.set(wordInterval, forKey: SettingsKeys.wordInterval)
         defaults.set(lastModified.timeIntervalSince1970, forKey: Self.modifiedKey)
     }
 }

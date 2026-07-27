@@ -67,4 +67,27 @@ enum SettingsKeys {
     static let prefersFemaleVoice = "prefersFemaleVoice"
     static let showsDisabilityBadge = "showsDisabilityBadge"
     static let speechRate = "speechRate"
+    static let wordInterval = "wordInterval"
+}
+
+/// How long each word of a phrase stays on the watch screen, in seconds.
+///
+/// Reading one word at a time is the whole mechanic of the phrase screen, and
+/// the right pace is personal: an unhurried reader, or someone being shown a
+/// phrase in a second language, needs longer than the original fixed 0.5s.
+enum WordPace {
+    static let `default`: Double = 0.5
+    static let slowest: Double = 1.5
+    static let fastest: Double = 0.3
+
+    /// The stored value, clamped, with the default when nothing is set.
+    ///
+    /// Read straight from `UserDefaults` rather than `SettingsStore` so the
+    /// timeline views can pick it up without observing the store.
+    static var current: Double {
+        guard let stored = UserDefaults.standard.object(forKey: SettingsKeys.wordInterval) as? Double else {
+            return `default`
+        }
+        return min(max(stored, fastest), slowest)
+    }
 }
