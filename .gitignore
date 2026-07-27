@@ -1,0 +1,9 @@
+.DS_Store
+xcuserdata/
+
+# Original workshop photographs and worksheets — 41 MB of full-resolution
+# source material. Kept on disk as the record behind the About screen, but
+# out of git history, which is not a good home for large binaries and cannot
+# easily be made to forget them. The three used in the app live in
+# Assets.xcassets, downscaled to a few hundred KB in total.
+CoDesignSessions/

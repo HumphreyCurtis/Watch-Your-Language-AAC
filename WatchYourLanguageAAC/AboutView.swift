@@ -28,6 +28,26 @@ struct AboutView: View {
             }
 
             Section {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(alignment: .top, spacing: 12) {
+                        ForEach(CoDesignMoment.all) { moment in
+                            CoDesignCard(moment: moment)
+                        }
+                    }
+                    .padding(.vertical, 4)
+                }
+                // The cards run to the screen edge; the row supplies its own
+                // leading inset so the first one lines up with the text above.
+                .listRowInsets(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 0))
+                .listRowBackground(Color.clear)
+            } header: {
+                PlatformHeader(text: "Co-design", tint: TransportPalette.elizabeth)
+            } footer: {
+                Text("The app was designed with people with aphasia, in workshops run with Aphasia Re-Connect. Almost everything here started on one of these tables.")
+                    .font(.appFootnote)
+            }
+
+            Section {
                 Link(destination: supportDeveloperURL) {
                     Label("Sponsor development", systemImage: "heart.fill")
                 }
@@ -58,6 +78,64 @@ struct AboutView: View {
         .signageSurface()
         .navigationTitle("About")
         .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+/// A moment from the co-design workshops, shown on the About screen.
+///
+/// The three chosen are the ones where you can see a feature being invented:
+/// the phrase list, the keyword list, and the code that explains aphasia.
+/// They are also the three that show no identifiable faces — the workshop
+/// photographs that do are kept out of the app, since shipping a
+/// participant's face is a consent question rather than a design one.
+private struct CoDesignMoment: Identifiable {
+    let id = UUID()
+    let asset: String
+    let caption: String
+
+    static let all: [CoDesignMoment] = [
+        CoDesignMoment(
+            asset: "CoDesignStrokePhrases",
+            caption: "Workshop sketch: the phrases the app still ships with — and the tortoise that became “please speak slowly”."
+        ),
+        CoDesignMoment(
+            asset: "CoDesignSavedWords",
+            caption: "“Saved common forgotten words”, and a note to display them large. This became Keywords."
+        ),
+        CoDesignMoment(
+            asset: "CoDesignScanningQR",
+            caption: "Testing the code on the watch that explains aphasia to the person opposite."
+        ),
+    ]
+}
+
+private struct CoDesignCard: View {
+    let moment: CoDesignMoment
+
+    @Environment(\.colorScheme) private var colorScheme
+
+    private let width: CGFloat = 240
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Image(moment.asset)
+                .resizable()
+                // Fitted, not filled: these are documents and photographs
+                // where the content runs to the edges, and cropping them to a
+                // uniform rectangle would cut out the very thing being shown.
+                .scaledToFit()
+                .frame(width: width, height: 170)
+                .background(TransportPalette.block(colorScheme))
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+
+            Text(moment.caption)
+                .font(.appFootnote)
+                .foregroundStyle(TransportPalette.corporateGrey.color)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(width: width, alignment: .leading)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(moment.caption)
     }
 }
 
