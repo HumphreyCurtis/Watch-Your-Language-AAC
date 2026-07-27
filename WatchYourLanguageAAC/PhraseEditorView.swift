@@ -28,6 +28,13 @@ struct PhraseEditorView: View {
         isNew = phrase == nil
     }
 
+    /// The phrase's own screen colour, so the editor's headings carry the
+    /// colour the phrase will be shown in — and change with it as the
+    /// colour picker below is used.
+    private var tint: SignageColor {
+        PhraseColor.signageColor(named: draft.colorName)
+    }
+
     private var canSave: Bool {
         !draft.label.trimmingCharacters(in: .whitespaces).isEmpty
             && !draft.spokenText.trimmingCharacters(in: .whitespaces).isEmpty
@@ -50,6 +57,14 @@ struct PhraseEditorView: View {
                 PhrasePlayView(phrase: draft)
             }
         }
+        // On the whole stack, not just the form: `scrollContentBackground`
+        // travels down through the environment to the `Form`, so the picker
+        // strip and the form end up on one surface instead of the form
+        // keeping the system's cool grey against the app's warmer one.
+        .signageSurface()
+        // `TextField`, `Picker` and `Button` labels are system controls and
+        // default to SF.
+        .font(.appBody)
         .navigationTitle(isNew ? "New Phrase" : draft.label)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -73,21 +88,29 @@ struct PhraseEditorView: View {
 
     private var editForm: some View {
         Form {
-            Section("Label") {
+            Section {
                 TextField("Short label (e.g. Water)", text: $draft.label)
+            } header: {
+                PlatformHeader(text: "Label", tint: tint)
             }
 
-            Section("Spoken sentence") {
+            Section {
                 TextField("Full sentence to speak", text: $draft.spokenText, axis: .vertical)
                     .lineLimit(2...4)
+            } header: {
+                PlatformHeader(text: "Spoken sentence", tint: tint)
             }
 
-            Section("Icon") {
+            Section {
                 IconPicker(symbol: $draft.systemIcon, emoji: $draft.emoji)
+            } header: {
+                PlatformHeader(text: "Icon", tint: tint)
             }
 
-            Section("Screen colour") {
+            Section {
                 ScreenColorPicker(selection: $draft.colorName)
+            } header: {
+                PlatformHeader(text: "Screen colour", tint: tint)
             }
 
             if !isNew {
