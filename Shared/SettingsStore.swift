@@ -16,6 +16,7 @@ final class SettingsStore {
     private(set) var showsDisabilityBadge: Bool
     private(set) var speechRate: Double
     private(set) var wordInterval: Double
+    private(set) var prefersFemaleVoice: Bool
 
     private var lastModified: Date
 
@@ -28,6 +29,7 @@ final class SettingsStore {
         showsDisabilityBadge = defaults.object(forKey: SettingsKeys.showsDisabilityBadge) as? Bool ?? false
         speechRate = defaults.object(forKey: SettingsKeys.speechRate) as? Double ?? Speaker.defaultRate
         wordInterval = WordPace.current
+        prefersFemaleVoice = defaults.object(forKey: SettingsKeys.prefersFemaleVoice) as? Bool ?? false
         lastModified = Date(timeIntervalSince1970: defaults.double(forKey: Self.modifiedKey))
         AppSync.shared.register(key: SyncKey.settings) { [weak self] payload in
             guard let self,
@@ -53,6 +55,11 @@ final class SettingsStore {
         noteChanged()
     }
 
+    func setPrefersFemaleVoice(_ value: Bool) {
+        prefersFemaleVoice = value
+        noteChanged()
+    }
+
     private func noteChanged() {
         lastModified = .now
         persist()
@@ -70,6 +77,9 @@ final class SettingsStore {
         if let value = payload["wordInterval"] as? Double {
             wordInterval = value
         }
+        if let value = payload["prefersFemaleVoice"] as? Bool {
+            prefersFemaleVoice = value
+        }
         lastModified = modified
         persist()
     }
@@ -79,6 +89,7 @@ final class SettingsStore {
             "showsDisabilityBadge": showsDisabilityBadge,
             "speechRate": speechRate,
             "wordInterval": wordInterval,
+            "prefersFemaleVoice": prefersFemaleVoice,
             "modified": lastModified.timeIntervalSince1970,
         ])
     }
@@ -88,6 +99,8 @@ final class SettingsStore {
         defaults.set(showsDisabilityBadge, forKey: SettingsKeys.showsDisabilityBadge)
         defaults.set(speechRate, forKey: SettingsKeys.speechRate)
         defaults.set(wordInterval, forKey: SettingsKeys.wordInterval)
+        // `Speaker` reads this straight from defaults when it picks a voice.
+        defaults.set(prefersFemaleVoice, forKey: SettingsKeys.prefersFemaleVoice)
         defaults.set(lastModified.timeIntervalSince1970, forKey: Self.modifiedKey)
     }
 }

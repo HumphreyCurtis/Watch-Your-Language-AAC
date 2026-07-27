@@ -6,9 +6,17 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @AppStorage(SettingsKeys.prefersFemaleVoice) private var prefersFemaleVoice = false
-
     private var settings: SettingsStore { .shared }
+
+    /// Through the store, not `@AppStorage`: this was the one setting that
+    /// stayed on the device it was set on, so the phone and the watch could
+    /// disagree about the voice.
+    private var prefersFemaleVoice: Binding<Bool> {
+        Binding(
+            get: { settings.prefersFemaleVoice },
+            set: { settings.setPrefersFemaleVoice($0) }
+        )
+    }
 
     private var speechRate: Binding<Double> {
         Binding(
@@ -37,7 +45,7 @@ struct SettingsView: View {
             // read very differently at a glance, and keeping them apart
             // makes the screen scannable rather than a mixed list.
             Section {
-                Toggle("Female voice", isOn: $prefersFemaleVoice)
+                Toggle("Female voice", isOn: prefersFemaleVoice)
 
                 Toggle("Disability badge", isOn: Binding(
                     get: { settings.showsDisabilityBadge },
