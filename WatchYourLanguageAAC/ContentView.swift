@@ -83,7 +83,9 @@ struct ContentView: View {
                     introduction
                 }
             }
-            .listStyle(.plain)
+            // The default grouped style, not `.plain`: it is the one that
+            // slides content under the navigation bar instead of bouncing it
+            // against the top, and every screen in the app now uses it.
             .signageSurface()
             .navigationTitle("Watch Your Language")
             // Inline, because the system centres an inline title and never
@@ -104,8 +106,6 @@ struct ContentView: View {
             text: "Show and speak phrases from your Apple Watch",
             tint: TransportPalette.central
         )
-        // Matches the grouped screens' header inset — see `BreatheView`.
-        .listRowInsets(EdgeInsets(top: 0, leading: 32, bottom: 4, trailing: 20))
     }
 
     @ViewBuilder

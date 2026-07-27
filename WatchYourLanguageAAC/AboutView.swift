@@ -28,26 +28,6 @@ struct AboutView: View {
             }
 
             Section {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment: .top, spacing: 12) {
-                        ForEach(CoDesignMoment.all) { moment in
-                            CoDesignCard(moment: moment)
-                        }
-                    }
-                    .padding(.vertical, 4)
-                }
-                // The cards run to the screen edge; the row supplies its own
-                // leading inset so the first one lines up with the text above.
-                .listRowInsets(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 0))
-                .listRowBackground(Color.clear)
-            } header: {
-                PlatformHeader(text: "Co-design", tint: TransportPalette.elizabeth)
-            } footer: {
-                Text("The app was designed with people with aphasia, in workshops run with Aphasia Re-Connect. Almost everything here started on one of these tables.")
-                    .font(.appFootnote)
-            }
-
-            Section {
                 Link(destination: supportDeveloperURL) {
                     Label("Sponsor development", systemImage: "heart.fill")
                 }
@@ -59,6 +39,17 @@ struct AboutView: View {
                 PlatformHeader(text: "Support", tint: TransportPalette.elizabeth)
             } footer: {
                 Text("The app is free and always will be. Aphasia Re-Connect is UK registered charity 1176125.")
+                    .font(.appFootnote)
+            }
+
+            Section {
+                ForEach(CoDesignMoment.all) { moment in
+                    CoDesignCard(moment: moment)
+                }
+            } header: {
+                PlatformHeader(text: "Co-design", tint: TransportPalette.elizabeth)
+            } footer: {
+                Text("The app was designed with people with aphasia, in workshops run with Aphasia Re-Connect. Almost everything here started on one of these tables.")
                     .font(.appFootnote)
             }
 
@@ -112,28 +103,26 @@ private struct CoDesignMoment: Identifiable {
 private struct CoDesignCard: View {
     let moment: CoDesignMoment
 
-    @Environment(\.colorScheme) private var colorScheme
-
-    private let width: CGFloat = 240
-
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 10) {
             Image(moment.asset)
                 .resizable()
                 // Fitted, not filled: these are documents and photographs
                 // where the content runs to the edges, and cropping them to a
                 // uniform rectangle would cut out the very thing being shown.
+                // The height cap stops the one portrait image from taking a
+                // whole screen to itself.
                 .scaledToFit()
-                .frame(width: width, height: 170)
-                .background(TransportPalette.block(colorScheme))
+                .frame(maxWidth: .infinity, maxHeight: 300)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
 
             Text(moment.caption)
                 .font(.appFootnote)
                 .foregroundStyle(TransportPalette.corporateGrey.color)
                 .fixedSize(horizontal: false, vertical: true)
-                .frame(width: width, alignment: .leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .padding(.vertical, 6)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(moment.caption)
     }

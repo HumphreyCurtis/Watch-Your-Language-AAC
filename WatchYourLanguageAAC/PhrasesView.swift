@@ -41,6 +41,8 @@ struct PhrasesView: View {
                 .onDelete { offsets in
                     store.remove(atOffsets: offsets)
                 }
+            } header: {
+                PlatformHeader(text: "Stored on Watch", tint: TransportPalette.central)
             } footer: {
                 Text("Swipe a phrase right to speak it.")
                     .font(.appFootnote)
@@ -48,7 +50,6 @@ struct PhrasesView: View {
 
             librarySection
         }
-        .listStyle(.plain)
         .signageSurface()
         .navigationTitle("Phrases")
         .navigationBarTitleDisplayMode(.inline)
