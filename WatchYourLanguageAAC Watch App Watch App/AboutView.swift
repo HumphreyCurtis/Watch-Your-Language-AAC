@@ -14,22 +14,23 @@ struct AboutView: View {
         ScrollView {
             VStack(spacing: 10) {
                 Text("Watch Your Language")
-                    .font(.title3)
-                    .fontWeight(.bold)
+                    .font(.appTitle2)
                     .multilineTextAlignment(.center)
 
                 Text("A free communication support app for people with aphasia and other communication needs, based on accessibility research.")
+                    .font(.appBody)
                     .multilineTextAlignment(.center)
 
                 Divider()
 
                 Text("Ways to support the app are in the iPhone app.")
+                    .font(.appFootnote)
                     .multilineTextAlignment(.center)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(TransportPalette.corporateGrey.color)
 
                 Text("Version \(version)")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
+                    .font(.appCaption)
+                    .foregroundStyle(TransportPalette.corporateGrey.color)
             }
         }
         .navigationTitle("About")

@@ -27,14 +27,15 @@ struct KeywordsView: View {
                 NavigationLink {
                     AddKeywordView()
                 } label: {
-                    PhraseRow(title: "Add Keyword", systemIcon: "plus.circle.fill")
+                    PhraseRow(title: "Add Keyword", systemIcon: "plus.circle.fill", tint: TransportPalette.district)
                 }
             }
 
             Section {
                 if keywords.words.isEmpty {
                     Text("Store the words that matter — names, addresses, places. Synced with your iPhone.")
-                        .foregroundStyle(.secondary)
+                        .font(.appFootnote)
+                        .foregroundStyle(TransportPalette.corporateGrey.color)
                 }
 
                 ForEach(searchResults, id: \.self) { word in
@@ -42,6 +43,7 @@ struct KeywordsView: View {
                         KeywordDetailView(word: word)
                     } label: {
                         Text(word)
+                            .font(.appBody)
                     }
                 }
                 .onDelete { offsets in

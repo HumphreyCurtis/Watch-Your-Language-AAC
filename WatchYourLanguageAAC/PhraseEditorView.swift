@@ -116,16 +116,9 @@ private struct IconPicker: View {
         _customEmoji = State(initialValue: emoji.wrappedValue ?? "")
     }
 
-    private static let symbols = [
-        "text.bubble.fill", "questionmark.circle.fill", "exclamationmark.shield", "tortoise.fill",
-        "chair.fill", "clock.badge.exclamationmark.fill", "figure.roll", "toilet.fill",
-        "hand.thumbsup", "hand.raised.fill", "heart.fill", "cross.case.fill",
-        "pills.fill", "drop.fill", "fork.knife", "cup.and.saucer.fill",
-        "bed.double.fill", "house.fill", "car.fill", "bus",
-        "tram.fill", "phone.fill", "envelope.fill", "creditcard.fill",
-        "key.fill", "sun.max.fill", "cloud.rain.fill", "star.fill",
-        "ear", "eye",
-    ]
+    /// Shared with the AI import prompt, so the icons offered here and the
+    /// icons an assistant is told to use stay the same set.
+    private static let symbols = PhraseTransfer.curatedSymbols
 
     /// Keeps a symbol visible even if it isn't in the curated set
     /// (e.g. a phrase synced from a future version).
@@ -141,7 +134,7 @@ private struct IconPicker: View {
                     symbol = icon
                 } content: {
                     Image(systemName: icon)
-                        .font(.title3)
+                        .font(.appTitle3)
                 }
             }
         }
@@ -156,7 +149,7 @@ private struct IconPicker: View {
                         emoji = nil
                         customEmoji = ""
                     }
-                    .font(.footnote)
+                    .font(.appFootnote)
                     .buttonStyle(.borderless)
                 }
             }
@@ -178,12 +171,12 @@ private struct IconPicker: View {
             content()
                 .frame(width: 44, height: 44)
                 .background(
-                    isSelected ? Color.accentColor.opacity(0.15) : .clear,
-                    in: RoundedRectangle(cornerRadius: 8)
+                    isSelected ? TransportPalette.roundelBlue.color.opacity(0.15) : .clear,
+                    in: RoundedRectangle(cornerRadius: 6)
                 )
                 .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(isSelected ? Color.accentColor : .clear)
+                    RoundedRectangle(cornerRadius: 6)
+                        .stroke(isSelected ? TransportPalette.roundelBlue.color : .clear, lineWidth: 2)
                 )
         }
         .buttonStyle(.plain)
@@ -252,11 +245,11 @@ private struct ScreenColorPicker: View {
                         .frame(width: 36, height: 36)
                         .overlay(
                             Circle()
-                                .stroke(isSelected(name) ? Color.primary : .clear, lineWidth: 2.5)
+                                .stroke(isSelected(name) ? Color.primary : .clear, lineWidth: 3)
                         )
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel(name)
+                .accessibilityLabel(PhraseColor.lineName(for: name))
                 .accessibilityAddTraits(isSelected(name) ? .isSelected : [])
             }
         }
@@ -285,7 +278,7 @@ struct PhrasePlayView: View {
             VStack(spacing: 12) {
                 TimelineView(.periodic(from: .now, by: 0.5)) { context in
                     Text(word(at: context.date))
-                        .font(.system(size: 44, weight: .bold))
+                        .font(.appDisplay(40))
                         .lineLimit(1)
                         .minimumScaleFactor(0.4)
                 }
@@ -298,7 +291,7 @@ struct PhrasePlayView: View {
                         .font(.title)
                 }
             }
-            .foregroundStyle(.white)
+            .foregroundStyle(PhraseColor.foreground(named: phrase.colorName))
             .padding(24)
             .frame(width: 200, height: 240)
             .background(PhraseColor.color(named: phrase.colorName), in: RoundedRectangle(cornerRadius: 44))
@@ -314,8 +307,8 @@ struct PhrasePlayView: View {
             .accessibilityHint("Tap to speak the phrase")
 
             Text("Tap the watch face to hear the phrase spoken aloud.")
-                .font(.footnote)
-                .foregroundStyle(.secondary)
+                .font(.appFootnote)
+                .foregroundStyle(TransportPalette.corporateGrey.color)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
 

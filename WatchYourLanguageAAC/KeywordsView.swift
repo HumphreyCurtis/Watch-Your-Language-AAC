@@ -26,10 +26,7 @@ struct KeywordsView: View {
                         .disabled(newKeyword.trimmingCharacters(in: .whitespaces).isEmpty)
                 }
             } header: {
-                Text("Store the words that matter — your street, a family name, a place — ready to show and speak from the watch.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .textCase(nil)
+                PlatformHeader(text: "Your words", tint: TransportPalette.piccadilly)
             }
 
             Section {
@@ -37,7 +34,13 @@ struct KeywordsView: View {
                     Button {
                         Speaker.shared.speak(word)
                     } label: {
-                        Text(word)
+                        HStack(spacing: 12) {
+                            Rectangle()
+                                .fill(TransportPalette.piccadilly.color)
+                                .frame(width: 4, height: 22)
+                            Text(word)
+                                .font(.appBody)
+                        }
                     }
                     .tint(.primary)
                 }
@@ -45,13 +48,13 @@ struct KeywordsView: View {
                     keywords.remove(atOffsets: offsets)
                 }
             } footer: {
-                if keywords.words.isEmpty {
-                    Text("Keywords you add here or speak on the watch appear on both devices.")
-                } else {
-                    Text("Tap a keyword to speak it. Synced with your Apple Watch.")
-                }
+                Text(keywords.words.isEmpty
+                     ? "Names, addresses, places — ready on your watch."
+                     : "Tap to speak.")
+                    .font(.appFootnote)
             }
         }
+        .signageSurface()
         .navigationTitle("Keywords")
     }
 

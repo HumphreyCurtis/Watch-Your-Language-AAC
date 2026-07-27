@@ -25,8 +25,8 @@ struct SettingsView: View {
                 #if os(iOS)
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Choose the voice the app speaks with and what appears on the watch.")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .font(.appSubheadline)
+                        .foregroundStyle(TransportPalette.corporateGrey.color)
                         .textCase(nil)
 
                     Label("System Voice", systemImage: "speaker.wave.2.circle.fill")
@@ -46,10 +46,10 @@ struct SettingsView: View {
                     Text("Speaking speed")
                 } minimumValueLabel: {
                     Image(systemName: "tortoise.fill")
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(TransportPalette.corporateGrey.color)
                 } maximumValueLabel: {
                     Image(systemName: "hare.fill")
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(TransportPalette.corporateGrey.color)
                 }
                 #else
                 Slider(value: speechRate, in: 0.3...0.7, step: 0.05) {
@@ -70,7 +70,8 @@ struct SettingsView: View {
                     set: { settings.setShowsDisabilityBadge($0) }
                 ))
             } footer: {
-                Text("Show the blue disability card button on the watch phrase screens. Turn off when using the app for general language support.")
+                Text("Adds a button to the watch phrase screens that shows a disability card.")
+                    .font(.appFootnote)
             }
         }
         .navigationTitle("Settings")

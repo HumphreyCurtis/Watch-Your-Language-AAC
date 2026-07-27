@@ -7,8 +7,7 @@ import SwiftUI
 
 /// The story behind the app and ways to support it.
 struct AboutView: View {
-    // TODO: Replace with your real Buy Me a Coffee (or similar) page before release.
-    private let supportDeveloperURL = URL(string: "https://www.buymeacoffee.com/humphreycurtis")!
+    private let supportDeveloperURL = URL(string: "https://github.com/sponsors/HumphreyCurtis")!
     private let charityURL = URL(string: "https://aphasiareconnect.org/ways-to-help/donate/")!
     private let researchURL = URL(string: "https://dl.acm.org/doi/10.1145/3597638.3608379")!
 
@@ -21,8 +20,6 @@ struct AboutView: View {
             Section("About") {
                 Text("Watch Your Language is a free AAC communication support app. It helps people with aphasia and other communication needs to be understood — showing and speaking phrases from an Apple Watch, right where a conversation happens.")
 
-                Text("It began as published accessibility research into how smartwatches can support communication, and is developed in that spirit: simple, glanceable and designed with communities with aphasia.")
-
                 Link(destination: researchURL) {
                     Label("Read or cite the research paper", systemImage: "doc.text")
                 }
@@ -30,7 +27,7 @@ struct AboutView: View {
 
             Section {
                 Link(destination: supportDeveloperURL) {
-                    Label("Buy me a coffee", systemImage: "cup.and.saucer.fill")
+                    Label("Sponsor development", systemImage: "heart.fill")
                 }
 
                 Link(destination: charityURL) {
@@ -39,7 +36,8 @@ struct AboutView: View {
             } header: {
                 Text("Support")
             } footer: {
-                Text("The app is free and always will be. If it helps you, you can support its development, or donate to Aphasia Re-Connect (UK registered charity 1176125), which runs services with and for people with aphasia.")
+                Text("The app is free and always will be. Aphasia Re-Connect is UK registered charity 1176125.")
+                    .font(.appFootnote)
             }
 
             Section {
@@ -47,10 +45,11 @@ struct AboutView: View {
                     Text("Version")
                     Spacer()
                     Text(version)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(TransportPalette.corporateGrey.color)
                 }
             }
         }
+        .signageSurface()
         .navigationTitle("About")
     }
 }

@@ -24,8 +24,7 @@ struct AphasiaInfoView: View {
                     Text(line)
                         .multilineTextAlignment(.center)
                         .padding()
-                        .font(.title3)
-                        .fontWeight(.bold)
+                        .font(.appTitle3)
                         .onTapGesture {
                             Speaker.shared.speak(line)
                         }
@@ -35,13 +34,12 @@ struct AphasiaInfoView: View {
 
                 Text("Tips")
                     .padding(.bottom)
-                    .font(.title3)
-                    .fontWeight(.bold)
+                    .font(.appTitle2)
 
                 VStack(alignment: .leading, spacing: 4) {
                     ForEach(Array(AphasiaInfo.tips.enumerated()), id: \.offset) { index, tip in
                         Text("\(index + 1). \(tip)")
-                            .fontWeight(.bold)
+                            .font(.appHeadline)
                     }
                 }
                 .onTapGesture {

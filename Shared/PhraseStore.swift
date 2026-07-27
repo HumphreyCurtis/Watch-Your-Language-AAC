@@ -60,6 +60,19 @@ final class PhraseStore {
         setPhrases(updated)
     }
 
+    /// Replaces the whole library, as the JSON editor does.
+    ///
+    /// Destructive and synced: whatever is passed here reaches the watch.
+    /// An empty list is refused unless `allowingEmpty` is set, so a bad
+    /// paste cannot silently wipe the library — the caller has to mean it.
+    /// Returns whether the replacement was applied.
+    @discardableResult
+    func replaceAll(_ updated: [Phrase], allowingEmpty: Bool = false) -> Bool {
+        guard !updated.isEmpty || allowingEmpty else { return false }
+        setPhrases(updated)
+        return true
+    }
+
     func remove(id: UUID) {
         setPhrases(phrases.filter { $0.id != id })
     }

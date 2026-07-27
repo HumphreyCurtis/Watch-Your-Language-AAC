@@ -17,7 +17,14 @@ struct PhrasesView: View {
                     NavigationLink {
                         DetailView(phrase: phrase)
                     } label: {
-                        PhraseRow(title: phrase.label, systemIcon: phrase.systemIcon, emoji: phrase.emoji)
+                        // Each roundel takes its phrase's own screen colour,
+                        // so the list previews what the reader will see.
+                        PhraseRow(
+                            title: phrase.label,
+                            systemIcon: phrase.systemIcon,
+                            emoji: phrase.emoji,
+                            tint: PhraseColor.signageColor(named: phrase.colorName)
+                        )
                     }
                 }
             } footer: {

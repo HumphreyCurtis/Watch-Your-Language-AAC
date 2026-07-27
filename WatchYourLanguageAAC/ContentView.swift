@@ -5,102 +5,98 @@
 
 import SwiftUI
 
-/// Home screen: the app's five main features, mirroring the watch app.
+/// Home screen: the app's six main features, mirroring the watch app.
+///
+/// Each destination keeps one colour wherever it appears, on both devices,
+/// so the app can be navigated by colour as much as by reading.
 struct ContentView: View {
+
+    private enum Feature {
+        case phrases, keywords, breathing, aphasiaInfo, settings, about
+    }
+
+    /// One destination and the line colour that identifies it throughout.
+    private struct Destination: Identifiable {
+        let id = UUID()
+        let feature: Feature
+        let title: String
+        let systemIcon: String
+        let tint: SignageColor
+    }
+
+    private let destinations: [Destination] = [
+        Destination(
+            feature: .phrases,
+            title: "Phrases",
+            systemIcon: "text.bubble.fill",
+            tint: TransportPalette.central
+        ),
+        Destination(
+            feature: .keywords,
+            title: "Keywords",
+            systemIcon: "key.fill",
+            tint: TransportPalette.piccadilly
+        ),
+        Destination(
+            feature: .breathing,
+            title: "Breathing",
+            systemIcon: "lungs",
+            tint: TransportPalette.victoria
+        ),
+        Destination(
+            feature: .aphasiaInfo,
+            title: "Aphasia Info",
+            systemIcon: "person.fill.questionmark",
+            tint: TransportPalette.district
+        ),
+        Destination(
+            feature: .settings,
+            title: "Settings",
+            systemIcon: "gear",
+            tint: TransportPalette.corporateGrey
+        ),
+        Destination(
+            feature: .about,
+            title: "About",
+            systemIcon: "info.circle.fill",
+            tint: TransportPalette.elizabeth
+        ),
+    ]
+
     var body: some View {
         NavigationStack {
             List {
                 Section {
-                    NavigationLink {
-                        PhrasesView()
-                    } label: {
-                        HomeRow(
-                            title: "Phrases",
-                            subtitle: "Speak and customise phrases",
-                            systemIcon: "text.bubble.fill"
-                        )
+                    ForEach(destinations) { destination in
+                        NavigationLink {
+                            view(for: destination.feature)
+                        } label: {
+                            SignageRow(
+                                title: destination.title,
+                                systemIcon: destination.systemIcon,
+                                tint: destination.tint
+                            )
+                        }
+                        .signageRowStyle()
                     }
-
-                    NavigationLink {
-                        KeywordsView()
-                    } label: {
-                        HomeRow(
-                            title: "Keywords",
-                            subtitle: "Names, addresses and places - ready to store and speak",
-                            systemIcon: "key.fill"
-                        )
-                    }
-
-                    NavigationLink {
-                        BreatheView()
-                    } label: {
-                        HomeRow(
-                            title: "Breathing",
-                            subtitle: "Calming breathing exercises",
-                            systemIcon: "lungs"
-                        )
-                    }
-
-                    NavigationLink {
-                        AphasiaInfoView()
-                    } label: {
-                        HomeRow(
-                            title: "Aphasia Info",
-                            subtitle: "Information for conversation partners",
-                            systemIcon: "person.fill.questionmark"
-                        )
-                    }
-
-                    NavigationLink {
-                        SettingsView()
-                    } label: {
-                        HomeRow(
-                            title: "Settings",
-                            subtitle: "Voice options",
-                            systemIcon: "gear"
-                        )
-                    }
-
-                    NavigationLink {
-                        AboutView()
-                    } label: {
-                        HomeRow(
-                            title: "About",
-                            subtitle: "The story behind the app and ways to support it",
-                            systemIcon: "info.circle.fill"
-                        )
-                    }
-                } header: {
-                    Text("Co-designed with communities with aphasia and ready for communication in other languages too!")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                        .textCase(nil)
                 }
             }
+            .listStyle(.plain)
+            .signageSurface()
             .navigationTitle("Watch Your Language")
         }
     }
-}
 
-private struct HomeRow: View {
-    let title: String
-    let subtitle: String
-    let systemIcon: String
-
-    var body: some View {
-        Label {
-            VStack(alignment: .leading, spacing: 2) {
-                Text(title)
-                    .font(.headline)
-                Text(subtitle)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
-        } icon: {
-            Image(systemName: systemIcon)
-                .font(.title3)
+    @ViewBuilder
+    private func view(for feature: Feature) -> some View {
+        switch feature {
+        case .phrases: PhrasesView()
+        case .keywords: KeywordsView()
+        case .breathing: BreatheView()
+        case .aphasiaInfo: AphasiaInfoView()
+        case .settings: SettingsView()
+        case .about: AboutView()
         }
-        .padding(.vertical, 4)
     }
 }
 

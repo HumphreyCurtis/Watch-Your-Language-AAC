@@ -13,17 +13,20 @@ struct BreatheView: View {
                     NavigationLink {
                         BreathingSessionView(exercise: exercise)
                     } label: {
-                        Label(exercise.name, systemImage: exercise.systemIcon)
-                            .padding(.vertical, 4)
+                        SignageRow(
+                            title: exercise.name,
+                            systemIcon: exercise.systemIcon,
+                            tint: TransportPalette.victoria
+                        )
                     }
+                    .signageRowStyle()
                 }
             } header: {
-                Text("Slow, guided breathing to ease communication anxiety before or during a conversation.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .textCase(nil)
+                PlatformHeader(text: "Exercises", tint: TransportPalette.victoria)
             }
         }
+        .listStyle(.plain)
+        .signageSurface()
         .navigationTitle("Breathing")
     }
 }
@@ -39,12 +42,11 @@ struct BreathingSessionView: View {
     var body: some View {
         VStack {
             Text(phaseLabel)
-                .font(.title2)
-                .fontWeight(.bold)
+                .font(.appTitle2)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(
                     Circle()
-                        .fill(Color(red: 111 / 255, green: 151 / 255, blue: 167 / 255))
+                        .fill(TransportPalette.calmSlate.color)
                         .frame(width: 130, height: 130)
                         .scaleEffect(scale)
                 )

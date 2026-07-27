@@ -15,6 +15,7 @@ struct AddKeywordView: View {
     var body: some View {
         VStack {
             Text("Add a keyword:")
+                .font(.appHeadline)
 
             TextField("Name, address, place…", text: $text)
                 .autocorrectionDisabled()
@@ -29,8 +30,8 @@ struct AddKeywordView: View {
 
             if let confirmation {
                 Text(confirmation)
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
+                    .font(.appFootnote)
+                    .foregroundStyle(TransportPalette.corporateGrey.color)
             }
         }
         .navigationTitle("Add Keyword")

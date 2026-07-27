@@ -5,32 +5,28 @@
 
 import SwiftUI
 
-/// Standard list row: large icon and title, sized for glanceability.
+/// Standard list row: roundel badge and title, sized for glanceability.
 struct PhraseRow: View {
     let title: String
     let systemIcon: String
     var emoji: String?
+    var tint: SignageColor = TransportPalette.roundelBlue
 
     var body: some View {
-        Label {
+        HStack(spacing: 10) {
+            RoundelBadge(systemIcon: systemIcon, emoji: emoji, tint: tint, size: 30)
+
             Text(title)
-                .font(.title2)
+                .font(.appTitle2)
                 .lineLimit(1)
-        } icon: {
-            if let emoji {
-                Text(emoji)
-                    .font(.system(size: 26))
-            } else {
-                Image(systemName: systemIcon)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 30)
-            }
+                .minimumScaleFactor(0.7)
+
+            Spacer(minLength: 0)
         }
-        .padding(5)
+        .padding(.vertical, 5)
     }
 }
 
 #Preview {
-    PhraseRow(title: "Phrases", systemIcon: "text.bubble.fill")
+    PhraseRow(title: "Phrases", systemIcon: "text.bubble.fill", tint: TransportPalette.central)
 }

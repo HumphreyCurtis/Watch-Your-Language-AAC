@@ -12,7 +12,7 @@ struct BreatheView: View {
             NavigationLink {
                 BreathingSessionView(exercise: exercise)
             } label: {
-                PhraseRow(title: exercise.name, systemIcon: exercise.systemIcon)
+                PhraseRow(title: exercise.name, systemIcon: exercise.systemIcon, tint: TransportPalette.victoria)
             }
         }
         .listStyle(.carousel)
@@ -32,12 +32,11 @@ struct BreathingSessionView: View {
     var body: some View {
         VStack {
             Text(phaseLabel)
-                .font(.title3)
-                .fontWeight(.bold)
+                .font(.appTitle2)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(
                     Circle()
-                        .fill(Color(red: 111 / 255, green: 151 / 255, blue: 167 / 255))
+                        .fill(TransportPalette.calmSlate.color)
                         .frame(width: 60, height: 60)
                         .scaleEffect(scale)
                 )

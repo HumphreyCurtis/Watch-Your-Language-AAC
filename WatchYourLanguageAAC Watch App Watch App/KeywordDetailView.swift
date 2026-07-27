@@ -13,8 +13,7 @@ struct KeywordDetailView: View {
 
     var body: some View {
         Text(word)
-            .font(.title)
-            .fontWeight(.bold)
+            .font(.appDisplay(34))
             .multilineTextAlignment(.center)
             .minimumScaleFactor(0.3)
             .padding()

@@ -14,7 +14,10 @@ struct DisabilityCardView: View {
             .scaledToFit()
             .padding(.top, 20)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.blue)
+            // Blue is semantic here — it is the disability badge, not a
+            // style choice. Only the shade moves to the signage palette.
+            .foregroundStyle(TransportPalette.piccadilly.readableForeground.color)
+            .background(TransportPalette.piccadilly.color)
     }
 }
 

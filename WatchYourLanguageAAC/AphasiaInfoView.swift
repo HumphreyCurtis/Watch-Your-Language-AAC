@@ -16,16 +16,10 @@ struct AphasiaInfoView: View {
                     SpeakableRow(text: line)
                 }
             } header: {
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Helps conversation partners understand aphasia and communicate well.")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                        .textCase(nil)
-
-                    Text("What is aphasia?")
-                }
+                PlatformHeader(text: "What is aphasia?", tint: TransportPalette.district)
             } footer: {
-                Text("Tap a sentence to speak it aloud.")
+                Text("Tap a sentence to speak it.")
+                    .font(.appFootnote)
             }
 
             Section("Tips for communication") {
@@ -46,15 +40,16 @@ struct AphasiaInfoView: View {
                         .frame(height: 150)
                         .accessibilityLabel("QR code linking to aphasia information from the Stroke Association")
 
-                    Text("Show this code so a conversation partner can scan it and learn more about aphasia.")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
+                    Text("Scan to learn more about aphasia.")
+                        .font(.appFootnote)
+                        .foregroundStyle(TransportPalette.corporateGrey.color)
                         .multilineTextAlignment(.center)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 8)
             }
         }
+        .signageSurface()
         .navigationTitle("Aphasia")
     }
 }
@@ -69,10 +64,11 @@ private struct SpeakableRow: View {
         } label: {
             HStack {
                 Text(prefix.map { "\($0) \(text)" } ?? text)
+                    .font(.appBody)
                 Spacer()
                 Image(systemName: "speaker.wave.2")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
+                    .font(.appFootnote)
+                    .foregroundStyle(TransportPalette.corporateGrey.color)
             }
         }
         .tint(.primary)

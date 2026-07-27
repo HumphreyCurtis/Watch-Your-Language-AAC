@@ -38,15 +38,19 @@ enum PhraseLibrary {
     /// than baked into views so it can become user-configurable.
     static let disabilityCardIcon = "figure.roll"
 
+    /// Each example takes a different screen colour, so a new user sees the
+    /// range on first launch and can tell phrases apart at a glance on the
+    /// watch. "Help" keeps the high-visibility red default (`nil`).
     static let defaults: [Phrase] = [
         Phrase(label: "Help", spokenText: "Please can you help, it's hard to speak", systemIcon: "questionmark.circle.fill"),
-        Phrase(label: "Stroke", spokenText: "I have had a stroke", systemIcon: "exclamationmark.shield"),
-        Phrase(label: "Slower", spokenText: "Please speak more slowly", systemIcon: "tortoise.fill"),
-        Phrase(label: "Seat", spokenText: "Could you please let me have your seat?", systemIcon: "chair.fill"),
-        Phrase(label: "Time", spokenText: "Please give me time to answer", systemIcon: "clock.badge.exclamationmark.fill"),
-        Phrase(label: "Disability", spokenText: "I have got a hidden disability", systemIcon: "figure.roll"),
-        Phrase(label: "Toilet", spokenText: "Do you have a public or disabled toilet?", systemIcon: "toilet.fill"),
-        Phrase(label: "Thanks", spokenText: "Thank you very much", systemIcon: "hand.thumbsup"),
+        Phrase(label: "Stroke", spokenText: "I have had a stroke", systemIcon: "exclamationmark.shield", colorName: "purple"),
+        Phrase(label: "Slower", spokenText: "Please speak more slowly", systemIcon: "tortoise.fill", colorName: "teal"),
+        Phrase(label: "Seat", spokenText: "Could you please let me have your seat?", systemIcon: "chair.fill", colorName: "green"),
+        Phrase(label: "Time", spokenText: "Please give me time to answer", systemIcon: "clock.badge.exclamationmark.fill", colorName: "indigo"),
+        // Blue to match the disability card the watch can show.
+        Phrase(label: "Disability", spokenText: "I have got a hidden disability", systemIcon: "figure.roll", colorName: "blue"),
+        Phrase(label: "Toilet", spokenText: "Do you have a public or disabled toilet?", systemIcon: "toilet.fill", colorName: "orange"),
+        Phrase(label: "Thanks", spokenText: "Thank you very much", systemIcon: "hand.thumbsup", colorName: "pink"),
     ] + multilingualExamples
 
     /// Example multilingual phrases — spoken with a voice matching their
@@ -54,8 +58,8 @@ enum PhraseLibrary {
     /// New in seed version 2: `PhraseStore` appends these once to phrase
     /// lists saved by earlier versions.
     static let multilingualExamples: [Phrase] = [
-        Phrase(label: "Perdu", spokenText: "Je suis perdu, pouvez-vous m'aider ?", systemIcon: "map.fill", emoji: "🇫🇷", languageCode: "fr-FR"),
-        Phrase(label: "Metro", spokenText: "¿Dónde está la estación de metro?", systemIcon: "tram.fill", emoji: "🇪🇸", languageCode: "es-ES"),
+        Phrase(label: "Perdu", spokenText: "Je suis perdu, pouvez-vous m'aider ?", systemIcon: "map.fill", emoji: "🇫🇷", colorName: "teal", languageCode: "fr-FR"),
+        Phrase(label: "Metro", spokenText: "¿Dónde está la estación de metro?", systemIcon: "tram.fill", emoji: "🇪🇸", colorName: "orange", languageCode: "es-ES"),
     ]
 }
 

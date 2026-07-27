@@ -22,7 +22,9 @@ final class SettingsStore {
 
     private init() {
         let defaults = UserDefaults.standard
-        showsDisabilityBadge = defaults.object(forKey: SettingsKeys.showsDisabilityBadge) as? Bool ?? true
+        // Off unless the wearer turns it on: disclosing a disability is
+        // theirs to opt into, not something the app should show by default.
+        showsDisabilityBadge = defaults.object(forKey: SettingsKeys.showsDisabilityBadge) as? Bool ?? false
         speechRate = defaults.object(forKey: SettingsKeys.speechRate) as? Double ?? Speaker.defaultRate
         lastModified = Date(timeIntervalSince1970: defaults.double(forKey: Self.modifiedKey))
         AppSync.shared.register(key: SyncKey.settings) { [weak self] payload in

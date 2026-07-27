@@ -20,43 +20,36 @@ struct PhrasesView: View {
                     NavigationLink {
                         PhraseEditorView(phrase: phrase)
                     } label: {
-                        Label {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(phrase.label)
-                                    .font(.headline)
-                                Text(phrase.spokenText)
-                                    .font(.subheadline)
-                                    .foregroundStyle(.secondary)
-                            }
-                        } icon: {
-                            if let emoji = phrase.emoji {
-                                Text(emoji)
-                            } else {
-                                Image(systemName: phrase.systemIcon)
-                            }
-                        }
+                        SignageRow(
+                            title: phrase.label,
+                            subtitle: phrase.spokenText,
+                            systemIcon: phrase.systemIcon,
+                            emoji: phrase.emoji,
+                            tint: PhraseColor.signageColor(named: phrase.colorName)
+                        )
                     }
+                    .signageRowStyle()
                     .swipeActions(edge: .leading) {
                         Button {
                             Speaker.shared.speak(phrase)
                         } label: {
                             Label("Speak", systemImage: "speaker.wave.2.fill")
                         }
-                        .tint(.blue)
+                        .tint(TransportPalette.piccadilly.color)
                     }
                 }
                 .onDelete { offsets in
                     store.remove(atOffsets: offsets)
                 }
-            } header: {
-                Text("Ready-made sentences the watch displays and speaks aloud for you.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .textCase(nil)
             } footer: {
-                Text("Tap a phrase to edit it and preview it on the watch. Swipe right to speak it from this phone.")
+                Text("Swipe a phrase right to speak it.")
+                    .font(.appFootnote)
             }
+
+            librarySection
         }
+        .listStyle(.plain)
+        .signageSurface()
         .navigationTitle("Phrases")
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
@@ -71,6 +64,23 @@ struct PhrasesView: View {
             NavigationStack {
                 PhraseEditorView()
             }
+        }
+    }
+
+    /// The way into building phrases with an AI assistant. The raw JSON
+    /// editor lives behind it, since it is the rarer and riskier of the two.
+    private var librarySection: some View {
+        Section {
+            NavigationLink {
+                ImportPhrasesView()
+            } label: {
+                SignageRow(
+                    title: "Import with AI",
+                    systemIcon: "sparkles",
+                    tint: TransportPalette.elizabeth
+                )
+            }
+            .signageRowStyle()
         }
     }
 }
