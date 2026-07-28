@@ -49,7 +49,7 @@ struct AboutView: View {
             } header: {
                 PlatformHeader(text: "Co-design", tint: TransportPalette.elizabeth)
             } footer: {
-                Text("The app was designed with people with aphasia, in workshops run with Aphasia Re-Connect - almost everything here started on one of these tables.")
+                Text("The app was designed with people with aphasia, workshops in partnership with Aphasia Re-Connect.")
                     .font(.appFootnote)
             }
 
@@ -89,7 +89,7 @@ private struct CoDesignMoment: Identifiable {
     static let all: [CoDesignMoment] = [
         CoDesignMoment(
             asset: "CoDesignWorkshop",
-            caption: "A co-design workshop at Aphasia Re-Connect. The app was designed with the people who would go on to use it."
+            caption: "A co-design workshop at Aphasia Re-Connect."
         ),
         CoDesignMoment(
             asset: "CoDesignStrokePhrases",
@@ -101,7 +101,7 @@ private struct CoDesignMoment: Identifiable {
         ),
         CoDesignMoment(
             asset: "CoDesignShowingWatch",
-            caption: "Showing a phrase across a table — the moment the whole app is built around.",
+            caption: "Showing a phrase across a table — using the watch!",
             maxHeight: 460
         ),
         CoDesignMoment(
