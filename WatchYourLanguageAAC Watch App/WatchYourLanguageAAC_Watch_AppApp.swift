@@ -1,6 +1,6 @@
 //
 //  WatchYourLanguageAAC_Watch_AppApp.swift
-//  WatchYourLanguageAAC Watch App Watch App
+//  WatchYourLanguageAAC Watch App
 //
 //  Created by Humphrey Curtis on 06/07/2026.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct WatchYourLanguageAAC_Watch_App_Watch_AppApp: App {
+struct WatchYourLanguageAAC_Watch_AppApp: App {
     init() {
         // Before any view renders, or the first screens draw in the system font.
         AppFont.registerIfNeeded()

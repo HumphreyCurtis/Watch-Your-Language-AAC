@@ -1,6 +1,6 @@
 //
 //  PhrasesView.swift
-//  WatchYourLanguageAAC Watch App Watch App
+//  WatchYourLanguageAAC Watch App
 //
 
 import SwiftUI

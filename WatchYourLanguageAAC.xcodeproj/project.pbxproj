@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A1EF2AF52FFC694300CF551C /* WatchYourLanguageAAC Watch App Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A1EF2AEB2FFC694200CF551C /* WatchYourLanguageAAC Watch App Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A1EF2AF52FFC694300CF551C /* WatchYourLanguageAAC Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A1EF2AEB2FFC694200CF551C /* WatchYourLanguageAAC Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -16,7 +16,7 @@
 			containerPortal = A1EF2AD12FFC68F000CF551C /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A1EF2AEA2FFC694200CF551C;
-			remoteInfo = "WatchYourLanguageAAC Watch App Watch App";
+			remoteInfo = "WatchYourLanguageAAC Watch App";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -27,7 +27,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				A1EF2AF52FFC694300CF551C /* WatchYourLanguageAAC Watch App Watch App.app in Embed Watch Content */,
+				A1EF2AF52FFC694300CF551C /* WatchYourLanguageAAC Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -36,7 +36,7 @@
 
 /* Begin PBXFileReference section */
 		A1EF2AD92FFC68F000CF551C /* WatchYourLanguageAAC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchYourLanguageAAC.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1EF2AEB2FFC694200CF551C /* WatchYourLanguageAAC Watch App Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchYourLanguageAAC Watch App Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1EF2AEB2FFC694200CF551C /* WatchYourLanguageAAC Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchYourLanguageAAC Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -45,9 +45,9 @@
 			path = WatchYourLanguageAAC;
 			sourceTree = "<group>";
 		};
-		A1EF2AEC2FFC694200CF551C /* WatchYourLanguageAAC Watch App Watch App */ = {
+		A1EF2AEC2FFC694200CF551C /* WatchYourLanguageAAC Watch App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "WatchYourLanguageAAC Watch App Watch App";
+			path = "WatchYourLanguageAAC Watch App";
 			sourceTree = "<group>";
 		};
 		A1EF2B0A2FFC800000CF551C /* Shared */ = {
@@ -80,7 +80,7 @@
 			children = (
 				A1EF2B0A2FFC800000CF551C /* Shared */,
 				A1EF2ADB2FFC68F000CF551C /* WatchYourLanguageAAC */,
-				A1EF2AEC2FFC694200CF551C /* WatchYourLanguageAAC Watch App Watch App */,
+				A1EF2AEC2FFC694200CF551C /* WatchYourLanguageAAC Watch App */,
 				A1EF2ADA2FFC68F000CF551C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -89,7 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				A1EF2AD92FFC68F000CF551C /* WatchYourLanguageAAC.app */,
-				A1EF2AEB2FFC694200CF551C /* WatchYourLanguageAAC Watch App Watch App.app */,
+				A1EF2AEB2FFC694200CF551C /* WatchYourLanguageAAC Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -122,9 +122,9 @@
 			productReference = A1EF2AD92FFC68F000CF551C /* WatchYourLanguageAAC.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A1EF2AEA2FFC694200CF551C /* WatchYourLanguageAAC Watch App Watch App */ = {
+		A1EF2AEA2FFC694200CF551C /* WatchYourLanguageAAC Watch App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A1EF2AF62FFC694300CF551C /* Build configuration list for PBXNativeTarget "WatchYourLanguageAAC Watch App Watch App" */;
+			buildConfigurationList = A1EF2AF62FFC694300CF551C /* Build configuration list for PBXNativeTarget "WatchYourLanguageAAC Watch App" */;
 			buildPhases = (
 				A1EF2AE72FFC694200CF551C /* Sources */,
 				A1EF2AE82FFC694200CF551C /* Frameworks */,
@@ -135,14 +135,14 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				A1EF2AEC2FFC694200CF551C /* WatchYourLanguageAAC Watch App Watch App */,
+				A1EF2AEC2FFC694200CF551C /* WatchYourLanguageAAC Watch App */,
 				A1EF2B0A2FFC800000CF551C /* Shared */,
 			);
-			name = "WatchYourLanguageAAC Watch App Watch App";
+			name = "WatchYourLanguageAAC Watch App";
 			packageProductDependencies = (
 			);
-			productName = "WatchYourLanguageAAC Watch App Watch App";
-			productReference = A1EF2AEB2FFC694200CF551C /* WatchYourLanguageAAC Watch App Watch App.app */;
+			productName = "WatchYourLanguageAAC Watch App";
+			productReference = A1EF2AEB2FFC694200CF551C /* WatchYourLanguageAAC Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -178,7 +178,7 @@
 			projectRoot = "";
 			targets = (
 				A1EF2AD82FFC68F000CF551C /* WatchYourLanguageAAC */,
-				A1EF2AEA2FFC694200CF551C /* WatchYourLanguageAAC Watch App Watch App */,
+				A1EF2AEA2FFC694200CF551C /* WatchYourLanguageAAC Watch App */,
 			);
 		};
 /* End PBXProject section */
@@ -220,7 +220,7 @@
 /* Begin PBXTargetDependency section */
 		A1EF2AF42FFC694300CF551C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A1EF2AEA2FFC694200CF551C /* WatchYourLanguageAAC Watch App Watch App */;
+			target = A1EF2AEA2FFC694200CF551C /* WatchYourLanguageAAC Watch App */;
 			targetProxy = A1EF2AF32FFC694300CF551C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -500,7 +500,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A1EF2AF62FFC694300CF551C /* Build configuration list for PBXNativeTarget "WatchYourLanguageAAC Watch App Watch App" */ = {
+		A1EF2AF62FFC694300CF551C /* Build configuration list for PBXNativeTarget "WatchYourLanguageAAC Watch App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A1EF2AF72FFC694300CF551C /* Debug */,
