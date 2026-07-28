@@ -22,7 +22,18 @@ struct BreatheView: View {
                     .signageRowStyle()
                 }
             } header: {
-                PlatformHeader(text: "Exercises", tint: TransportPalette.victoria)
+                // Same shape as the Settings intro: a plain sentence above
+                // the heading, saying what the screen is for before the rows
+                // ask you to choose between them.
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Slow breathing to help you feel calm before you talk.")
+                        .font(.appSubheadline)
+                        .foregroundStyle(TransportPalette.corporateGrey.color)
+                        .textCase(nil)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    PlatformHeader(text: "Exercises", tint: TransportPalette.victoria)
+                }
             }
         }
         .signageSurface()
