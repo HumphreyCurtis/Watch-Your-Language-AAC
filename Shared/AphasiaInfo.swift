@@ -27,5 +27,5 @@ enum AphasiaInfo {
     }
 
     /// Destination of the QR code shown on both platforms.
-    static let learnMoreURL = URL(string: "https://www.stroke.org.uk/what-is-aphasia/aphasia-and-its-effects")!
+    static let learnMoreURL = URL(string: "https://www.stroke.org.uk/stroke/effects/aphasia")!
 }
