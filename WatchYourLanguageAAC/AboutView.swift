@@ -49,7 +49,7 @@ struct AboutView: View {
             } header: {
                 PlatformHeader(text: "Co-design", tint: TransportPalette.elizabeth)
             } footer: {
-                Text("The app was designed with people with aphasia, in workshops run with Aphasia Re-Connect. Almost everything here started on one of these tables.")
+                Text("The app was designed with people with aphasia, in workshops run with Aphasia Re-Connect - almost everything here started on one of these tables.")
                     .font(.appFootnote)
             }
 
@@ -74,24 +74,35 @@ struct AboutView: View {
 
 /// A moment from the co-design workshops, shown on the About screen.
 ///
-/// The three chosen are the ones where you can see a feature being invented:
-/// the phrase list, the keyword list, and the code that explains aphasia.
-/// They are also the three that show no identifiable faces — the workshop
-/// photographs that do are kept out of the app, since shipping a
-/// participant's face is a consent question rather than a design one.
+/// Ordered as the work happened: the room, then what was drawn in it, then
+/// the drawings being tried on a real watch.
 private struct CoDesignMoment: Identifiable {
     let id = UUID()
     let asset: String
     let caption: String
 
+    /// How tall the image may be drawn. The default suits a landscape
+    /// photograph or a worksheet; the tall sequence needs more, or it ends up
+    /// too narrow to make out.
+    var maxHeight: CGFloat = 300
+
     static let all: [CoDesignMoment] = [
+        CoDesignMoment(
+            asset: "CoDesignWorkshop",
+            caption: "A co-design workshop at Aphasia Re-Connect. The app was designed with the people who would go on to use it."
+        ),
         CoDesignMoment(
             asset: "CoDesignStrokePhrases",
             caption: "Workshop sketch: the phrases the app still ships with — and the tortoise that became “please speak slowly”."
         ),
         CoDesignMoment(
             asset: "CoDesignSavedWords",
-            caption: "“Saved common forgotten words”, and a note to display them large. This became Keywords."
+            caption: "“Saved common forgotten words”, and a note to display them large - this became Keywords."
+        ),
+        CoDesignMoment(
+            asset: "CoDesignShowingWatch",
+            caption: "Showing a phrase across a table — the moment the whole app is built around.",
+            maxHeight: 460
         ),
         CoDesignMoment(
             asset: "CoDesignScanningQR",
@@ -110,10 +121,9 @@ private struct CoDesignCard: View {
                 // Fitted, not filled: these are documents and photographs
                 // where the content runs to the edges, and cropping them to a
                 // uniform rectangle would cut out the very thing being shown.
-                // The height cap stops the one portrait image from taking a
-                // whole screen to itself.
+                // The cap stops a tall image taking a whole screen to itself.
                 .scaledToFit()
-                .frame(maxWidth: .infinity, maxHeight: 300)
+                .frame(maxWidth: .infinity, maxHeight: moment.maxHeight)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
 
             Text(moment.caption)

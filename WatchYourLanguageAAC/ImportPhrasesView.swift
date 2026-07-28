@@ -21,6 +21,7 @@ struct ImportPhrasesView: View {
     @State private var selected: Set<UUID> = []
     @State private var errorMessage: String?
     @State private var didCopyPrompt = false
+    @State private var isConfirmingReset = false
 
     private var store: PhraseStore { .shared }
 
@@ -39,10 +40,33 @@ struct ImportPhrasesView: View {
                 } label: {
                     Label("Edit raw JSON data", systemImage: "curlybraces")
                 }
+
+                Button(role: .destructive) {
+                    isConfirmingReset = true
+                } label: {
+                    Label("Reset phrases to defaults", systemImage: "arrow.counterclockwise")
+                }
+            } header: {
+                PlatformHeader(text: "Warning", tint: TransportPalette.central)
             } footer: {
-                Text("Replaces the whole library.")
+                Text("Both of these replace the whole library of phrases.")
                     .font(.appFootnote)
             }
+        }
+        // Destructive and not undoable, so it asks first. The confirming
+        // button repeats what it does rather than saying "OK", so the last
+        // thing read before tapping is the action itself.
+        .confirmationDialog(
+            "Reset phrases to defaults?",
+            isPresented: $isConfirmingReset,
+            titleVisibility: .visible
+        ) {
+            Button("Reset phrases", role: .destructive) {
+                _ = store.replaceAll(PhraseLibrary.defaults)
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("Your own phrases will be removed and the original set put back. This cannot be undone.")
         }
         .signageSurface()
         .navigationTitle("Import")

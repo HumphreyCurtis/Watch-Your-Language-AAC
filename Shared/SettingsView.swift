@@ -55,7 +55,7 @@ struct SettingsView: View {
                 // The sentence is the heading, as on the other screens,
                 // rather than a label with a sentence above it.
                 PlatformHeader(
-                    text: "Choose the voice and what shows on the watch",
+                    text: "Choose your voice and adjust watch displays",
                     tint: TransportPalette.corporateGrey,
                     systemIcon: "switch.2"
                 )

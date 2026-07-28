@@ -177,8 +177,14 @@ struct PlatformHeader: View {
 
                 Text(text.uppercased())
                     .font(.appCaption)
-                    .kerning(1.4)
+                    // Slightly tighter than the 1.4 this used to carry: the
+                    // longest headings are a few characters over one line at
+                    // that spacing, and losing a little letterspacing costs
+                    // less than either wrapping or shrinking the type.
+                    .kerning(1.0)
                     .foregroundStyle(TransportPalette.corporateGrey.color)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.85)
             }
 
             Rectangle()
