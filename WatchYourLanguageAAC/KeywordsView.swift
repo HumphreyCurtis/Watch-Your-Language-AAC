@@ -27,31 +27,39 @@ struct KeywordsView: View {
                 }
             } header: {
                 PlatformHeader(text: "Your words", tint: TransportPalette.piccadilly)
+            } footer: {
+                // With no keywords yet this belongs to the field above it,
+                // not to the list below. Left on an otherwise empty section
+                // it sat a whole section's spacing adrift of everything.
+                if keywords.words.isEmpty {
+                    Text("Names, addresses, places — ready on your watch.")
+                        .font(.appFootnote)
+                }
             }
 
-            Section {
-                ForEach(keywords.words, id: \.self) { word in
-                    Button {
-                        Speaker.shared.speak(word)
-                    } label: {
-                        HStack(spacing: 12) {
-                            Rectangle()
-                                .fill(TransportPalette.piccadilly.color)
-                                .frame(width: 4, height: 22)
-                            Text(word)
-                                .font(.appBody)
+            if !keywords.words.isEmpty {
+                Section {
+                    ForEach(keywords.words, id: \.self) { word in
+                        Button {
+                            Speaker.shared.speak(word)
+                        } label: {
+                            HStack(spacing: 12) {
+                                Rectangle()
+                                    .fill(TransportPalette.piccadilly.color)
+                                    .frame(width: 4, height: 22)
+                                Text(word)
+                                    .font(.appBody)
+                            }
                         }
+                        .tint(.primary)
                     }
-                    .tint(.primary)
+                    .onDelete { offsets in
+                        keywords.remove(atOffsets: offsets)
+                    }
+                } footer: {
+                    Text("Tap to speak.")
+                        .font(.appFootnote)
                 }
-                .onDelete { offsets in
-                    keywords.remove(atOffsets: offsets)
-                }
-            } footer: {
-                Text(keywords.words.isEmpty
-                     ? "Names, addresses, places — ready on your watch."
-                     : "Tap to speak.")
-                    .font(.appFootnote)
             }
         }
         .signageSurface()

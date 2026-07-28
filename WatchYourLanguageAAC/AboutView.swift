@@ -49,7 +49,7 @@ struct AboutView: View {
             } header: {
                 PlatformHeader(text: "Co-design", tint: TransportPalette.elizabeth)
             } footer: {
-                Text("The app was designed with people with aphasia, workshops in partnership with Aphasia Re-Connect.")
+                Text("The app was designed with and by people with aphasia, workshops in partnership with Aphasia Re-Connect.")
                     .font(.appFootnote)
             }
 
