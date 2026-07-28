@@ -103,7 +103,7 @@ struct ContentView: View {
     /// aphasia") has gone rather than being shouted.
     private var introduction: some View {
         PlatformHeader(
-            text: "Show and speak phrases from your Apple Watch",
+            text: "Assist your speech with an Apple Watch",
             tint: TransportPalette.central
         )
     }

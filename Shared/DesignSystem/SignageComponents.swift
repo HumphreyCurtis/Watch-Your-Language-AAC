@@ -159,12 +159,27 @@ struct PlatformHeader: View {
     let text: String
     var tint: SignageColor = TransportPalette.roundelBlue
 
+    /// An optional symbol before the text, for screens like Settings where
+    /// the icon is doing real work telling one section from another.
+    var systemIcon: String?
+
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(text.uppercased())
-                .font(.appCaption)
-                .kerning(1.4)
-                .foregroundStyle(TransportPalette.corporateGrey.color)
+            // Baseline-aligned, so a heading that wraps keeps its icon
+            // beside the first line rather than floating to the middle.
+            HStack(alignment: .firstTextBaseline, spacing: 6) {
+                if let systemIcon {
+                    Image(systemName: systemIcon)
+                        .font(.appCaption)
+                        .foregroundStyle(tint.color)
+                        .accessibilityHidden(true)
+                }
+
+                Text(text.uppercased())
+                    .font(.appCaption)
+                    .kerning(1.4)
+                    .foregroundStyle(TransportPalette.corporateGrey.color)
+            }
 
             Rectangle()
                 .fill(tint.color)

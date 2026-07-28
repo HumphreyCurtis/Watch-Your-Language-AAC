@@ -52,18 +52,13 @@ struct SettingsView: View {
                     set: { settings.setShowsDisabilityBadge($0) }
                 ))
             } header: {
-                #if os(iOS)
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Choose the voice the app speaks with and what appears on the watch.")
-                        .font(.appSubheadline)
-                        .foregroundStyle(TransportPalette.corporateGrey.color)
-                        .textCase(nil)
-
-                    Label("Options", systemImage: "switch.2")
-                }
-                #else
-                Label("Options", systemImage: "switch.2")
-                #endif
+                // The sentence is the heading, as on the other screens,
+                // rather than a label with a sentence above it.
+                PlatformHeader(
+                    text: "Choose the voice and what shows on the watch",
+                    tint: TransportPalette.corporateGrey,
+                    systemIcon: "switch.2"
+                )
             } footer: {
                 Text("The disability badge adds a button to the watch phrase screens that shows a disability card.")
                     .font(.appFootnote)
@@ -90,7 +85,11 @@ struct SettingsView: View {
                 }
                 #endif
             } header: {
-                Label("Words On Screen", systemImage: "timer")
+                PlatformHeader(
+                    text: "Words on screen",
+                    tint: TransportPalette.corporateGrey,
+                    systemIcon: "timer"
+                )
             } footer: {
                 Text("How long each word of a phrase is held on the watch before the next one.")
                     .font(.appFootnote)
@@ -121,7 +120,11 @@ struct SettingsView: View {
                     Speaker.shared.speak("Hello, this is how I will speak.")
                 }
             } header: {
-                Label("Speaking Speed", systemImage: "gauge.with.needle")
+                PlatformHeader(
+                    text: "Speaking speed",
+                    tint: TransportPalette.corporateGrey,
+                    systemIcon: "gauge.with.needle"
+                )
             }
         }
         // `Toggle`, `Slider` and `Button` labels are system controls and
