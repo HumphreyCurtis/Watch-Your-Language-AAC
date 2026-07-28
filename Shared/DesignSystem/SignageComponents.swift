@@ -100,8 +100,10 @@ struct SignageRow: View {
         .padding(.vertical, verticalPadding)
         .padding(.horizontal, horizontalPadding)
         .frame(maxWidth: .infinity, minHeight: minimumHeight, alignment: .leading)
-        .background(TransportPalette.block(colorScheme))
-        .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+        // No background of its own: `signageRowStyle()` puts the block behind
+        // the whole list row instead, so it reaches under the disclosure
+        // chevron rather than stopping short of it and leaving the arrow
+        // stranded on the surface outside the block.
     }
 
     // The watch stays compact — every row competes for a very small screen.
@@ -210,19 +212,42 @@ private struct SignageSurface: ViewModifier {
     }
 }
 
-/// Strips the default list-row inset and background so a `SignageRow` fills
-/// the row and controls its own edges.
+/// Puts a `SignageRow` on a full-width signage block.
+///
+/// The block is the row's background rather than the row content's, so it
+/// spans the whole width the list gives the row — including the disclosure
+/// chevron, which a `NavigationLink` lays out as part of the row. Drawn
+/// inside the content, the block stopped short and left the arrow sitting on
+/// the surface beside it.
 extension View {
     func signageRowStyle() -> some View {
+        modifier(SignageRowStyle())
+    }
+}
+
+private struct SignageRowStyle: ViewModifier {
+    @Environment(\.colorScheme) private var colorScheme
+
+    func body(content: Content) -> some View {
         // `listRowSeparator` is iOS-only; watchOS lists draw no separators.
         #if os(watchOS)
-        self
+        content
             .listRowInsets(EdgeInsets(top: 3, leading: 4, bottom: 3, trailing: 4))
-            .listRowBackground(Color.clear)
+            .listRowBackground(
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(TransportPalette.block(colorScheme))
+            )
         #else
-        self
-            .listRowInsets(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
-            .listRowBackground(Color.clear)
+        content
+            // No leading inset: `SignageRow` carries its own padding, so the
+            // block can run to the edge of the row. The trailing inset is
+            // what keeps the chevron off the block's right edge.
+            .listRowInsets(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 16))
+            .listRowBackground(
+                RoundedRectangle(cornerRadius: 14)
+                    .fill(TransportPalette.block(colorScheme))
+                    .padding(.vertical, 6)
+            )
             .listRowSeparator(.hidden)
         #endif
     }
