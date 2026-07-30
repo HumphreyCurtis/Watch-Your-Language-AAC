@@ -14,7 +14,7 @@ Bluetooth is enabled and the app has been opened on both devices.
 
 ## Report a problem or suggest an improvement
 
-Use [GitHub Issues](https://github.com/HumphreyCurtis/WatchYourLanguageAAC/issues)
+Use [GitHub Issues](https://github.com/HumphreyCurtis/Watch-Your-Language-AAC/issues)
 for bug reports, accessibility feedback and feature suggestions. Please
 describe the device models, OS versions and what you expected to happen. Do
 not include private health information or phrases you do not want to share

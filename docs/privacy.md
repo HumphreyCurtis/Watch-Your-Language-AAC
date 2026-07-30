@@ -37,6 +37,6 @@ to Apple's platform behavior and any device backups you control.
 ## Changes and contact
 
 Material changes to this policy will be recorded on this page. For a privacy
-question, [open a GitHub issue](https://github.com/HumphreyCurtis/WatchYourLanguageAAC/issues).
+question, [open a GitHub issue](https://github.com/HumphreyCurtis/Watch-Your-Language-AAC/issues).
 
 [Return to the project README](../README.md)

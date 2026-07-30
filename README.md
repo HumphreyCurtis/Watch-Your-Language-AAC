@@ -89,7 +89,7 @@ advertising identifiers or personal data on developer-operated servers. See
 the full [privacy policy](docs/privacy.md) and [support page](docs/support.md).
 
 Found a problem or have an accessibility suggestion?
-[Open an issue](https://github.com/HumphreyCurtis/WatchYourLanguageAAC/issues).
+[Open an issue](https://github.com/HumphreyCurtis/Watch-Your-Language-AAC/issues).
 
 ## Acknowledgements
 
