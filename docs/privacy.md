@@ -2,8 +2,7 @@
 
 **Last updated: 28 July 2026**
 
-Watch Your Language, listed as **Watch AAC** on the App Store, is designed to
-work without an account or a developer-operated online service.
+Watch Your Language AAC is designed to work without an account or a developer-operated online service.
 
 ## Information the app handles
 
