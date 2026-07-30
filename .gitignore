@@ -1,9 +1,36 @@
+# macOS
 .DS_Store
+
+# Xcode
+DerivedData/
+build/
 xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+*.moved-aside
+*.xcarchive
+*.dSYM
+*.dSYM.zip
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# Signing and App Store exports
+*.cer
+*.p12
+*.mobileprovision
+*.provisionprofile
+*.ipa
+*.dmg
+*.app
+*.appex
+*.xcresult
+ExportOptions.plist
 
 # Original workshop photographs and worksheets — 41 MB of full-resolution
-# source material. Kept on disk as the record behind the About screen, but
-# out of git history, which is not a good home for large binaries and cannot
-# easily be made to forget them. The three used in the app live in
-# Assets.xcassets, downscaled to a few hundred KB in total.
+# source material. The optimized images used by the app remain in its asset
+# catalog; the originals stay local and out of git history.
 CoDesignSessions/
