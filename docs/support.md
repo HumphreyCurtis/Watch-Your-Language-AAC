@@ -1,7 +1,5 @@
 # Watch Your Language Support
 
-Watch Your Language is listed as **Watch AAC** on the App Store.
-
 ## Getting started
 
 1. Add or edit phrases in the iPhone app.

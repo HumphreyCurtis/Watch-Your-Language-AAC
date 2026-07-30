@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/images/iphone-phrases.png" width="270" alt="Watch AAC phrase library on iPhone">
+  <img src="docs/images/iphone-phrases.png" width="270" alt="Watch Your Language phrase library on iPhone">
   &nbsp;&nbsp;&nbsp;
   <img src="docs/images/watch-phrases.png" width="190" alt="Watch Your Language phrases on Apple Watch">
 </p>
@@ -23,8 +23,6 @@ Watch Your Language puts short, useful phrases within reach at the moment a
 conversation happens. A wearer can show a phrase word by word on Apple Watch,
 speak it aloud, or use the iPhone companion app to prepare and personalize
 their communication.
-
-The App Store name is **Watch AAC**.
 
 ## What it does
 
