@@ -88,6 +88,10 @@ the full [privacy policy](docs/privacy.md) and [support page](docs/support.md).
 
 Found a problem or have an accessibility suggestion?
 [Open an issue](https://github.com/HumphreyCurtis/Watch-Your-Language-AAC/issues).
+Code contributions are welcome too; please read the
+[contributing guide](CONTRIBUTING.md) before opening a pull request. Security
+issues should be reported privately as described in the
+[security policy](SECURITY.md).
 
 ## Acknowledgements
 

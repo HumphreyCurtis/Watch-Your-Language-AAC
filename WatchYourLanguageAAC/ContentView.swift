@@ -87,7 +87,7 @@ struct ContentView: View {
             // slides content under the navigation bar instead of bouncing it
             // against the top, and every screen in the app now uses it.
             .signageSurface()
-            .navigationTitle("Watch Your Language")
+            .navigationTitle("Watch Your Language AAC")
             // Inline, because the system centres an inline title and never
             // centres a large one.
             .navigationBarTitleDisplayMode(.inline)

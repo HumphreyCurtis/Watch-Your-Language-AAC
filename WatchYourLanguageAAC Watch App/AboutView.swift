@@ -13,7 +13,7 @@ struct AboutView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 10) {
-                Text("Watch Your Language")
+                Text("Watch Your Language AAC")
                     .font(.appTitle2)
                     .multilineTextAlignment(.center)
 
