@@ -1,5 +1,9 @@
 # Watch Your Language Support
 
+## Download the app
+
+[Download Watch Your Language AAC from the App Store](https://apps.apple.com/gb/app/watch-your-language-aac/id6796487344).
+
 ## Getting started
 
 1. Add or edit phrases in the iPhone app.

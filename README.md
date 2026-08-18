@@ -9,6 +9,12 @@
 </p>
 
 <p align="center">
+  <a href="https://apps.apple.com/gb/app/watch-your-language-aac/id6796487344">
+    <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-gb?size=250x83" width="180" alt="Download Watch Your Language AAC on the App Store">
+  </a>
+</p>
+
+<p align="center">
   <img alt="Platforms: iOS and watchOS" src="https://img.shields.io/badge/platforms-iOS%20%7C%20watchOS-111111">
   <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-0078D4"></a>
 </p>
